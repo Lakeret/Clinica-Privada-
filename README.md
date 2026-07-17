@@ -1,1 +1,2 @@
-# Clinica-Privada-
+# _Clinica-Privada_
+## DER Diagrama Enttidad Relacion
