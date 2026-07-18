@@ -1,1 +1,2 @@
-#Sistema de gestión Hospitalaria (HIS) - Clínica San Rafael
+# Sistema de gestión Hospitalaria (HIS) - Clínica San Rafael
+## Integrantes: 
