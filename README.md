@@ -5,4 +5,4 @@ Product Owner: Manuel Fernandez Massa
 
 Scrum Master: Agustin Sapir.
 
-Team: Démian Nataniel Correa, Alba Spitalnik
+Team: Démian Nataniel Correa, Alba Spitalnik, Lucas Santi.
