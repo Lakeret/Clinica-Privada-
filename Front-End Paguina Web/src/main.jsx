@@ -5,6 +5,6 @@ import Inicio from './PanelFrontal.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Inicio />
+    <Login />
   </StrictMode>,
 )
