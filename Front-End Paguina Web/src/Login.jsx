@@ -2,9 +2,9 @@ import { useState } from 'react'
 import './Login.css'
 
 function InicioSesion() {
-  const [dni, setDni] = useState("");
-  const [password, setPassword] = useState("");
-  const [genero, setGenero] = useState("");
+  let [dni, setDni] = useState("");
+  let [password, setPassword] = useState("");
+  let [genero, setGenero] = useState("");
 
   const IngresoDatos = () => {
     if (!dni || !password || !genero) {
@@ -14,6 +14,10 @@ function InicioSesion() {
     console.log("DNI ingresado:", dni);
     console.log("Contraseña ingresado:", password);
     console.log("Gnero seleccionado:", genero);
+
+    setDni = ("");
+    setPassword = ("");
+    setGenero = ("");
   };
 
   return (
