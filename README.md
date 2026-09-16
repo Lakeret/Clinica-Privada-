@@ -12,6 +12,8 @@ Démian Nataniel Correa, Lucas Santi y Juan Espeche.
 - Primero hacemos este comando git:
 ```git
 git config --global user.name "tu-nombre-de-usuario-de-github"
+```
+```git
 git config --global user.email "tu-email-de-github"
 ```
 - Luego podremos clonar los archivos tranquilamente sin ningún inconveniente
