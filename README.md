@@ -9,7 +9,7 @@ Team:
 Démian Nataniel Correa, Lucas Santi y Juan Espeche.
 
 ## Para clonar los archivos primero hacemos esto en la terminal de VS Code:
-- Primero hacemos este comando git:
+- Primero hacemos este comando Git:
 ```git
 git config --global user.name "tu-nombre-de-usuario-de-github"
 ```
