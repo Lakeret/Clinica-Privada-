@@ -8,7 +8,7 @@ Scrum Master: Agustin Sapir.
 Team: 
 Démian Nataniel Correa, Lucas Santi y Juan Espeche.
 
-## Para clonar los archivos primero hacemos esto en la terminal de VS Code:
+## Para commitear los archivos primero hacemos esto en la terminal de VS Code:
 - Primero hacemos este comando Git:
 ```git
 git config --global user.name "tu-nombre-de-usuario-de-github"
@@ -16,7 +16,7 @@ git config --global user.name "tu-nombre-de-usuario-de-github"
 ```git
 git config --global user.email "tu-email-de-github"
 ```
-- Luego podremos clonar los archivos tranquilamente sin ningún inconveniente
+- Luego podremos commitear los archivos tranquilamente sin ningún inconveniente
 
 ## Para clonar los archivos al VS Code
 
