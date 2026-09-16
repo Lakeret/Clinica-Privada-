@@ -10,6 +10,6 @@ Démian Nataniel Correa, Lucas Santi y Juan Espeche.
 
 ## Para clonar los archivos
 
-´´´git
+```git
 git clone -b FrontEnd https://github.com/Lakeret/Clinica-Privada-.git
-´´´
+```
