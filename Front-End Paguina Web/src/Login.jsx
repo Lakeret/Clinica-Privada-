@@ -13,7 +13,7 @@ function InicioSesion() {
     }
     console.log("DNI ingresado:", dni);
     console.log("Contraseña ingresado:", password);
-    console.log("Gnero seleccionado:", genero);
+    console.log("Género seleccionado:", genero);
 
     setDni = ("");
     setPassword = ("");
@@ -66,7 +66,7 @@ function Login() {
         <div className="navegador">
           <ul>
             <li>Inicio</li>
-            <li>Ubicaion</li>
+            <li>Ubicación</li>
             <li>Contacto</li>
             <li>Ayuda</li>
           </ul>
@@ -76,7 +76,7 @@ function Login() {
       <InicioSesion />
       <footer>
         <h1>CLINICA PRIVADA</h1>
-        <h4>CUIDANDOE SIEMRPE</h4>
+        <h4>CUIDANDOE SIEMPRE</h4>
         <p>© 2026 Clínica Privada · Todos los derechos reservados</p>
       </footer>
     </>
