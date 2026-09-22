@@ -1,0 +1,353 @@
+* {
+    font-family: "inter";
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #123B52;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+header h1{
+    color: white;
+}
+
+.texto1 {
+    margin: 10px;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.texto1 h1{
+    font-size: 23px;
+}
+
+.texto1 p{
+    font-size: 11px;
+    color: #D1E0E5;
+}
+
+.cerrar a, .cerrar a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+.cerrar a:hover{
+    color: #667078;
+    cursor: pointer;
+}
+
+#fondo2{
+    background-color: #F4F7F9;
+    justify-content: center;
+    align-items: center;
+}
+
+.bienvenida-dr h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #0D2F40;
+    text-align: center;
+    font-size: 23px;
+}
+
+.cuadricula{
+    padding: 10px;
+    gap: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.activos{
+    background-color: white;
+    border-radius: 20px;
+    height: 173px;
+    width: 236px;
+    text-align: center;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+.activos h3{
+    font-size: 16px;
+    color: #667078;
+}
+
+.activos p{
+    font-size: 48px;
+    color: #1E5A7A;
+}
+
+.guardia{
+    background-color: white;
+    border-radius: 20px;
+    height: 173px;
+    width: 236px;
+    text-align: center;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+.guardia h3{
+    font-size: 16px;
+    color: #667078;
+}
+
+.guardia p{
+    font-size: 48px;
+    color: #219E5C;
+}
+
+.salas{
+    background-color: white;
+    border-radius: 20px;
+    height: 173px;
+    width: 236px;
+    text-align: center;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+.salas h3{
+    font-size: 16px;
+    color: #667078;
+}
+
+.salas p{
+    font-size: 48px;
+    color: #F2AB1A;
+}
+
+.alertas{
+    background-color: white;
+    border-radius: 20px;
+    height: 173px;
+    width: 236px;
+    text-align: center;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+.alertas h3{
+    font-size: 16px;
+    color: #667078;
+}
+
+.alertas p{
+    font-size: 48px;
+    color: #FF0000;
+}
+
+.cuadri{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alertas-urgencias{
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 20px;
+    width: 1013px;
+    height: 205px;
+}
+
+.textoAlertas{
+    font-size: 20px;
+    padding: 20px;
+}
+
+.urgencias,.atencion {
+    width: 100%;
+    height: 55px;
+    box-sizing: border-box;
+    padding: 8px 20px;
+    border-radius: 50px;
+}
+
+.urgencias {
+    background-color: #FFF0F0;
+}
+
+.atencion {
+    margin-top: 5px;
+    background-color: #FFFAE5;
+}
+
+.urgencias h3,
+.atencion h3 {
+    font-size: 14px;
+    margin: 0;
+}
+
+.urgencias p,
+.atencion p {
+    font-size: 14px;
+    font-weight: bold;
+    color: #667078;
+    margin: 3px 0 0;
+}
+
+.urgencias h3 {
+    color: #FF0000;
+}
+
+.atencion h3 {
+    color: #F2AB1A;
+}
+
+.urgencias,
+.atencion {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.circulo-rojo,
+.circulo-naranja {
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.circulo-rojo {
+    background-color: red;
+}
+
+.circulo-naranja {
+    background-color: #F2AB1A;
+}
+
+
+
+
+.usuario {
+    position: absolute;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+
+
+.parte-inferior {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding-bottom: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.ultimos-pacientes {
+    background-color: white;
+    border-radius: 20px;
+    width: 620px;
+    height: 192px;
+    padding: 15px 30px;
+    box-sizing: border-box;
+}
+
+.turnos {
+    background-color: white;
+    border-radius: 20px;
+    width: 381px;
+    height: 189px;
+    padding: 15px 25px;
+    box-sizing: border-box;
+}
+
+.ultimos-pacientes h3,
+.turnos h3 {
+    color: #123B52;
+    font-size: 17px;
+    margin: 0 0 15px 0;
+}
+
+
+
+.paciente {
+    display: grid;
+    grid-template-columns: 1fr 1fr 30px;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.paciente span:nth-child(2) {
+    color: #667078;
+}
+
+.estado-verde,
+.estado-naranja {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.estado-verde {
+    background-color: #219E5C;
+}
+
+.estado-naranja {
+    background-color: #F2AB1A;
+}
+
+
+.turno {
+    display: grid;
+    grid-template-columns: 70px 1fr 40px;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.turno span:nth-child(2) {
+    color: #667078;
+}
+
+
+
+footer {
+    padding: 20px;
+    background-color: #123B52;
+    border-top: 4px solid #FF0000;
+}
+
+footer h1 {
+    font-family: "inter", sans-serif;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 40px;
+}
+
+footer h4 {
+    font-family: "inter", sans-serif;
+    color: #CCDBE0;
+    font-size: 11px;
+    text-align: center;
+    padding-top: 5px;
+}
+
+footer p {
+    font-family: "inter", sans-serif;
+    color: #A8BAC2;
+    font-size: 10px;
+    text-align: center;
+    padding-top: 20px;
+}
