@@ -36,8 +36,7 @@ header h1{
     padding: 10px 15px;
     color: white;
     background: transparent;
-    border: 1px solid #6f8997;
-    border-radius: 8px;
+    border-radius: 100%;
     font: 600 14px Arial, sans-serif;
     cursor: pointer;
     transition: background-color 0.2s, border-color 0.2s;
