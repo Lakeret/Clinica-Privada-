@@ -284,7 +284,7 @@
             <mxPoint x="364" y="180" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="-AZ-FGB0QM6Pr543HTvV-90" edge="1" parent="1" source="5Dbouo-FCJ6k7fvxZfIM-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="-AZ-FGB0QM6Pr543HTvV-73">
+        <mxCell id="-AZ-FGB0QM6Pr543HTvV-90" edge="1" parent="1" source="5Dbouo-FCJ6k7fvxZfIM-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="-AZ-FGB0QM6Pr543HTvV-73">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="5Dbouo-FCJ6k7fvxZfIM-35" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="BD Pagos" vertex="1">
