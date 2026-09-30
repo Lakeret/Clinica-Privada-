@@ -15,161 +15,126 @@
 </head>
 
 <body>
-    <header>
-        <div class="drawer">
-            <input id="my-drawer-1" type="checkbox" class="drawer-toggle">
+    <div class="contenedor-principal">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="/Recursos/Logo Clinica Privada.png" alt="logo" />
+                <div class="texto-logo-sidebar">
+                    <h2>Clinica Privada</h2>
+                    <p>Cuidandte Siempfe</p>
+                </div>
+            </div>
 
-            <label for="my-drawer-1" class="drawer-button">
-                <span class="icono-menu"><i class="fa-solid fa-bars"></i></span>
-            </label>
+            <p class="sidebar-seccion">Menu de Doctor</p>
+            <ul class="sidebar-opciones">
+                <li><a class="activo" href="#"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="#"><i class="fa-solid fa-user"></i> Pacientes</a></li>
+                <li><a href="#"><i class="fa-solid fa-calendar-days"></i> Turnos y Salas</a></li>
+                <li><a href="#"><i class="fa-solid fa-book-medical"></i> Historias Clinicas</a></li>
+            </ul>
 
-            <div class="drawer-side">
-                <label for="my-drawer-1" class="drawer-overlay" aria-label="Cerrar menú"></label>
+            <hr class="linea-divisor">
 
-                <nav class="sidebar">
-                    <div class="sidebar-header">
-                        <span class="sidebar-icono"><img src="/Recursos/Logo Clinica Privada.png" alt="logo" /></span>
-                        <div>
-                            <h2>Clínica Privada</h2>
-                            <p>Panel de navegación</p>
+            <p class="sidebar-seccion">Gestion</p>
+            <ul class="sidebar-opciones">
+                <li><a href="#"><i class="fa-solid fa-bell"></i> Alertas y Notificaciones</a></li>
+            </ul>
+
+            <div class="sidebar-usuario">
+                <img src="/Recursos/avatar.png" alt="Avatar" class="avatar-doc">
+                <div>
+                    <strong>Nombre Personal</strong>
+                    <p>ROL PERSONAL</p>
+                </div>
+            </div>
+        </aside>
+
+        <div class="contenido-derecha">
+            <header class="header-superior">
+                <div class="buscador">
+                    <input type="text" placeholder="Buscar Paciente">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div class="cerrar">
+                    <a href="./Login.html">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                    </a>
+                </div>
+            </header>
+
+            <main>
+                <section class="bienvenida-seccion">
+                    <h1>Bienvenida/a Nombre Dr.</h1>
+                    <div class="fecha-badge">Martes 1 de Septiembre</div>
+                </section>
+
+                <section class="cuadricula">
+                    <div class="tarjeta">
+                        <h3>Pacientes Internados</h3>
+                        <p>99</p>
+                    </div>
+                    <div class="tarjeta">
+                        <h3>Turnos de Hoy</h3>
+                        <p>99</p>
+                    </div>
+                    <div class="tarjeta">
+                        <h3>Salas Libres</h3>
+                        <p>99</p>
+                    </div>
+                    <div class="tarjeta">
+                        <h3>Alertas Activas</h3>
+                        <p>99</p>
+                    </div>
+                </section>
+
+                <section class="agenda-contenedor">
+                    <div class="agenda-titulo">
+                        <h2>Agenda de Hoy</h2>
+                        <a href="#" class="agenda-link">Ver Agenda Completa →</a>
+                    </div>
+                    <hr class="agenda-linea">
+
+                    <div class="agenda-lista">
+                        <div class="agenda-item">
+                            <span class="hora">09:30</span>
+                            <div class="detalle">
+                                <strong>Control Medico</strong>
+                                <p>NombreDR - Consultorio N° 99</p>
+                            </div>
+                            <span class="estado-confirmado">Confirmado</span>
+                        </div>
+
+                        <div class="agenda-item">
+                            <span class="hora">09:30</span>
+                            <div class="detalle">
+                                <strong>Control Medico</strong>
+                                <p>NombreDR - Consultorio N° 99</p>
+                            </div>
+                            <span class="estado-confirmado">Confirmado</span>
+                        </div>
+
+                        <div class="agenda-item">
+                            <span class="hora">09:30</span>
+                            <div class="detalle">
+                                <strong>Control Medico</strong>
+                                <p>NombreDR - Consultorio N° 99</p>
+                            </div>
+                            <span class="estado-confirmado">Confirmado</span>
+                        </div>
+
+                        <div class="agenda-item">
+                            <span class="hora">09:30</span>
+                            <div class="detalle">
+                                <strong>Control Medico</strong>
+                                <p>NombreDR - Consultorio N° 99</p>
+                            </div>
+                            <span class="estado-confirmado">Confirmado</span>
                         </div>
                     </div>
-
-                    <p class="sidebar-seccion">MENÚ PRINCIPAL</p>
-
-                    <ul class="sidebar-opciones">
-                        <li><a class="activo" href="#"><span>⌂</span> Inicio</a></li>
-                        <li><a href="#"><span>♙</span> Pacientes</a></li>
-                        <li><a href="#"><span>✚</span> Urgencias</a></li>
-                        <li><a href="#"><span>▤</span> Historias clínicas</a></li>
-                    </ul>
-
-                    <div class="sidebar-footer">Clínica Privada · 2026</div>
-                </nav>
-            </div>
+                </section>
+            </main>
         </div>
-        <div class="texto1">
-            <h1>CLINICA PRIVADA</h1>
-            <p>CUIDANDOTE SIEMPRE</p>
-        </div>
-        <div class="usuario">
-            <span>
-                <i class="fa-solid fa-bell"></i>
-            </span>
-            <strong>DR.NombreDoctor</strong>
-            <span class="cerrar">
-                <a href="./Login.html">
-                    <i class="fa-solid fa-right-to-bracket"></i>
-                </a>
-            </span>
-        </div>
-    </header>
-    <main>
-        <section id='fondo2'>
-            <div class='bienvenida-dr'>
-                <h1>Bienvenido/a DR.NombreDoctor</h1>
-            </div>
-            <div class='cuadricula'>
-                <div class='activos'>
-                    <h3>Pacientes</h3>
-                    <p>99</p>
-                    <h3>Activos</h3>
-                </div>
-                <div class='guardia'>
-                    <h3>Guardia</h3>
-                    <p>99</p>
-                    <h3>En Atencion</h3>
-                </div>
-                <div class='salas'>
-                    <h3>Salas</h3>
-                    <p>99</p>
-                    <h3>Ocupadas</h3>
-                </div>
-                <div class='alertas'>
-                    <h3>Pacientes</h3>
-                    <p>99</p>
-                    <h3>Requiere Atencion</h3>
-                </div>
-            </div>
-            <div class='cuadri'>
-                <div class='alertas-urgencias'>
-                    <div class='textoAlertas'>
-                        <h4>
-                            <i class="fa-solid fa-circle-exclamation"></i> ALERTAS Y URGENCIAS
-                        </h4>
-                    </div>
-                    <div class='urgencias'>
-                        <div class='circulo-rojo'></div>
-                        <div>
-                            <h3>URGENCIA - Habitacion 99</h3>
-                            <p>Emergencia cardiorespiratoria paciente: NombrePaciente</p>
-                        </div>
-                    </div>
-                    <div class='atencion'>
-                        <div class='circulo-naranja'></div>
-                        <div>
-                            <h3>ATENCION - Habitacion 99</h3>
-                            <p>Atencion para el Paciente: NombrePaciente ID</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="parte-inferior">
-
-                <div class="ultimos-pacientes">
-                    <h3>ULTIMOS PACIENTES</h3>
-
-                    <div class="paciente">
-                        <span>Paciente 999</span>
-                        <span>Habitacion 999</span>
-                        <span class="estado-verde"></span>
-                    </div>
-
-                    <div class="paciente">
-                        <span>Paciente 999</span>
-                        <span>Habitacion 999</span>
-                        <span class="estado-naranja"></span>
-                    </div>
-
-                    <div class="paciente">
-                        <span>Paciente 999</span>
-                        <span>Habitacion 999</span>
-                        <span class="estado-verde"></span>
-                    </div>
-                </div>
-
-                <div class="turnos">
-                    <h3>TURNOS DE HOY</h3>
-
-                    <div class="turno">
-                        <span>10:00</span>
-                        <span>NombrePaciente</span>
-                        <span>DNI</span>
-                    </div>
-
-                    <div class="turno">
-                        <span>10:00</span>
-                        <span>NombrePaciente</span>
-                        <span>DNI</span>
-                    </div>
-
-                    <div class="turno">
-                        <span>10:00</span>
-                        <span>NombrePaciente</span>
-                        <span>DNI</span>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <h1>CLINICA PRIVADA</h1>
-        <h4>CUIDANDOE SIEMRPE</h4>
-        <p>© 2026 Clínica Privada · Todos los derechos reservados</p>
-    </footer>
+    </div>
 
 </body>
 
