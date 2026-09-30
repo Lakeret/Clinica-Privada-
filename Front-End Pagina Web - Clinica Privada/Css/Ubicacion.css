@@ -42,7 +42,7 @@
     margin: 0px;
 }
 
-nav{
+nav {
     background-color: #FF0000;
 }
 
@@ -52,17 +52,20 @@ nav ul {
     justify-content: center;
     list-style: none;
     gap: 20px;
+    padding: 10px 0;
 }
 
-nav ul li {
+nav ul li a{
     font-family: "inter", sans-serif;
     color: white;
     font-size: 20px;
+    text-decoration: none;
 }
 
-nav ul li:hover {
-    color: grey;
+nav ul li a:hover {
+    color: #b3a1a1;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 main {
@@ -75,6 +78,13 @@ main {
 
 main h1{
     font-family: "inter", sans-serif;
+    padding: 20px;
+}
+
+.mapa iframe{
+    border-radius: 50px;
+    box-shadow: 0 5px 5px 5px rgba(102, 102, 102, 0.212);
+    margin: 20px;
 }
 
 footer {
