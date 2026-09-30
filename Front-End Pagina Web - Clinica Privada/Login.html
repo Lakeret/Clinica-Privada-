@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,21 +43,25 @@
                 <h1>INICIAR SESION</h1>
                 <h3>DNI</h3>
                 <input id="dni" type="number" placeholder="Ingrese su DNI" required />
-                <h3>CONTRASEÑA</h3>
+                <h3>Contraseña</h3>
                 <input id="psw" type="password" placeholder="Ingrese su contraseña" />
-                <h3>GENERO</h3>
-                <div class='genero'>
-                    <label>
-                        <input type="radio" name="genero" value="Femenino" /> Femenino
-                    </label>
-                    <label>
-                        <input type="radio" name="genero" value="Masculino" /> Masculino
-                    </label>
-                    <label>
-                        <input type="radio" name="genero" value="X" /> X
-                    </label>
-                </div>
-                <button id="entrar" type="button" onClick="location.href='Inicio.html' " >Iniciar Sesion</button>
+                <label for="generos">Genero</label>
+                <select name="generos" id="generos">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="Hombre">Hombre</option>
+                    <option value="Mujer">Mujer</option>
+                    <option value="x">No Binario</option>
+                </select>
+                <label for="roles">Rol</label>
+                <select name="roles" id="roles">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="Medico">Medico/a</option>
+                    <option value="Enfermero">Enfermeria</option>
+                    <option value="Admin">Administracion</option>
+                    <option value="Jefe">Jefatura</option>
+                    <option value="Farmaceutico">Farmacia</option>
+                </select>
+                <button id="entrar" type="button" onClick="location.href='Inicio.html' ">Iniciar Sesion</button>
                 <p class="recovery">¿Olvidaste tu contraseña?</p>
             </div>
         </section>
