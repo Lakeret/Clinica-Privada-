@@ -116,7 +116,6 @@ body {
     color: #A8BAC2;
 }
 
-/* --- CONTENIDO DE LA DERECHA --- */
 .contenido-derecha {
     flex: 1;
     display: flex;
@@ -124,7 +123,6 @@ body {
     background-color: #F4F7F9;
 }
 
-/* --- HEADER SUPERIOR --- */
 .header-superior {
     display: flex;
     justify-content: flex-end;
@@ -172,7 +170,6 @@ body {
     box-shadow: 0 2px 5px rgba(0,0,0,0.03);
 }
 
-/* --- CUERPO (MAIN) --- */
 main {
     padding: 30px;
 }
@@ -200,7 +197,6 @@ main {
     box-shadow: 0 2px 5px rgba(0,0,0,0.02);
 }
 
-/* --- CUADRÍCULA DE TARJETAS --- */
 .cuadricula {
     display: flex;
     gap: 20px;
@@ -228,7 +224,6 @@ main {
     color: #123B52;
 }
 
-/* --- AGENDA DE HOY --- */
 .agenda-contenedor {
     background-color: white;
     border-radius: 20px;
