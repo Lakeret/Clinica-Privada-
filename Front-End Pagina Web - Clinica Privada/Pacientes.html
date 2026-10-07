@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacientes</title>
+    <link rel="icon" type="image/png" href="/Recursos/Logo Clinica Privada.png">
+    <link rel="stylesheet" href="Css/Paciente.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c7d469fc45.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="contenedor-principal">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="Recursos/Logo Clinica Privada.png" alt="logo" />
+                <div class="texto-logo-sidebar">
+                    <h2>Clinica Privada</h2>
+                    <p>Cuidandote Siempre</p>
+                </div>
+            </div>
+
+            <p class="sidebar-seccion">Menu de Doctor</p>
+            <ul class="sidebar-opciones">
+                <li><a href="Inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a class="activo" href="Pacientes.html"><i class="fa-solid fa-user"></i> Pacientes</a></li>
+                <li><a href="Turnos_Salas.html"><i class="fa-solid fa-calendar-days"></i> Turnos y Salas</a></li>
+                <li><a href="Historias.html"><i class="fa-solid fa-book-medical"></i> Historias Clinicas</a></li>
+            </ul>
+
+            <hr class="linea-divisor">
+
+            <p class="sidebar-seccion">Gestion</p>
+            <ul class="sidebar-opciones">
+                <li><a href="Alertas_Noti.html"><i class="fa-solid fa-bell"></i> Alertas y Notificaciones</a></li>
+            </ul>
+
+            <div class="sidebar-usuario">
+                <img src="Recursos/avatar.png" alt="Avatar" class="avatar-doc">
+                <div>
+                    <strong>Nombre Personal</strong>
+                    <p>ROL PERSONAL</p>
+                </div>
+            </div>
+        </aside>
+
+        <div class="contenido-derecha">
+            <header class="header-superior">
+                <div class="buscador">
+                    <input type="text" placeholder="Buscar Paciente">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div class="cerrar">
+                    <a href="./Login.html">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                    </a>
+                </div>
+            </header>
+
+            <main>
+                <h1>Pacientes</h1>
+                <button>+ Nuevo Paciente</button>
+                <div class="pacientes">
+                    <div class="buscador">
+                        <input type="text" placeholder="Buscar Paciente">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <hr class="linea-roja">
+                    <table>
+                        <tr>
+                            <th>Paciente</th>
+                            <th>DNI</th>
+                            <th>Habitacion</th>
+                            <th>Ingreso</th>
+                            <th>Estado</th>
+                        </tr>
+                        <tr>
+                            <td>Nombre Apellido Paciente</td>
+                            <td>99.999.999</td>
+                            <td>N° Habitacion</td>
+                            <td>99/99/9999</td>
+                            <td>Internado</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre Apellido Paciente</td>
+                            <td>99.999.999</td>
+                            <td>N° Habitacion</td>
+                            <td>99/99/9999</td>
+                            <td>Alta</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre Apellido Paciente</td>
+                            <td>99.999.999</td>
+                            <td>N° Habitacion</td>
+                            <td>99/99/9999</td>
+                            <td>Consulta</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre Apellido Paciente</td>
+                            <td>99.999.999</td>
+                            <td>N° Habitacion</td>
+                            <td>99/99/9999</td>
+                            <td>Internado</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre Apellido Paciente</td>
+                            <td>99.999.999</td>
+                            <td>N° Habitacion</td>
+                            <td>99/99/9999</td>
+                            <td>Consulta</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre Apellido Paciente</td>
+                            <td>99.999.999</td>
+                            <td>N° Habitacion</td>
+                            <td>99/99/9999</td>
+                            <td>Internado</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <h1>Acceso con QR</h1>
+                    <div>
+                        <img src="/Recursos/qr-png" alt="QR">
+                    </div>
+                    <button>Escanear QR</button>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>
