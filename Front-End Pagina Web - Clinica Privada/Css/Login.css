@@ -55,15 +55,17 @@ nav ul {
     padding: 10px 0;
 }
 
-nav ul li {
+nav ul li a{
     font-family: "inter", sans-serif;
     color: white;
     font-size: 20px;
+    text-decoration: none;
 }
 
-nav ul li:hover {
-    color: #e0e0e0;
+nav ul li a:hover {
+    color: #b3a1a1;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 #mainn {
