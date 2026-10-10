@@ -142,6 +142,7 @@ body {
     display: flex;
     align-items: center;
     width: 280px;
+
 }
 
 .buscador input {
@@ -168,26 +169,4 @@ body {
     text-decoration: none;
     color: #FF3B30;
     box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-}   
-
-table {
-    width: 100%;
-    border-collapse: collapse; 
-}
-
-th:not(:last-child), td:not(:last-child) {
-    border-right: 2px solid #ccc; 
-    padding: 10px 15px;   
-}
-
-td {
-    text-align: center;
-}
-
-th {
-    border-bottom: 2px solid #ccc;
-}
-
-.linea-datos {
-    border-bottom: 2px solid #ccc;
 }
