@@ -168,26 +168,102 @@ body {
     text-decoration: none;
     color: #FF3B30;
     box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-}   
-
-table {
-    width: 100%;
-    border-collapse: collapse; 
 }
 
-th:not(:last-child), td:not(:last-child) {
-    border-right: 2px solid #ccc; 
-    padding: 10px 15px;   
+main {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-td {
-    text-align: center;
+main > h1 {
+    font-size: 24px;
+    color: #0D2F40;
+    font-weight: bold;
 }
 
-th {
-    border-bottom: 2px solid #ccc;
+main > button,
+main > div:last-child button {
+    background-color: #FF3B30;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    align-self: flex-start;
+}
+
+main > button:hover,
+main > div:last-child button:hover {
+    background-color: #e03229;
+}
+
+.pacientes {
+    background-color: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
 }
 
 .linea-datos {
-    border-bottom: 2px solid #ccc;
+    border: none;
+    border-top: 1px solid #EDF2F7;
+    margin: 15px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 13px;
+}
+
+th {
+    color: #81929A;
+    font-weight: 600;
+    padding: 12px 10px;
+}
+
+td {
+    padding: 14px 10px;
+    color: #2D3748;
+    border-bottom: 1px solid #EDF2F7;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+main > div:last-child {
+    background-color: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    text-align: center;
+}
+
+main > div:last-child h1 {
+    font-size: 18px;
+    color: #123B52;
+    align-self: flex-start;
+}
+
+main > div:last-child div img {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+}
+
+main > div:last-child button {
+    width: 100%;
+    align-self: center;
 }
