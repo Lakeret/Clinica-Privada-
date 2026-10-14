@@ -169,3 +169,55 @@ body {
     color: #FF3B30;
     box-shadow: 0 2px 5px rgba(0,0,0,0.03);
 }
+
+main {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+main > h1 {
+    font-size: 24px;
+    color: #0D2F40;
+    font-weight: bold;
+}
+
+.contenedor-turnos {
+    background-color: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contenedor-turnos h2 {
+    font-size: 18px;
+    color: #123B52;
+    font-weight: 600;
+}
+
+table.agenda {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 13px;
+}
+
+table.agenda th {
+    color: #81929A;
+    font-weight: 600;
+    padding: 12px 10px;
+}
+
+table.agenda td {
+    padding: 14px 10px;
+    color: #2D3748;
+    border-bottom: 1px solid #EDF2F7;
+}
+
+table.agenda tr:last-child td {
+    border-bottom: none;
+} 
