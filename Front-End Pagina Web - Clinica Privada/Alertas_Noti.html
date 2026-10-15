@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@
         rel="stylesheet">
     <script src="https://kit.fontawesome.com/c7d469fc45.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <div class="contenedor-principal">
         <aside class="sidebar">
@@ -36,7 +38,8 @@
 
             <p class="sidebar-seccion">Gestion</p>
             <ul class="sidebar-opciones">
-                <li><a class="activo" href="Alertas_Noti.html"><i class="fa-solid fa-bell"></i> Alertas y Notificaciones</a></li>
+                <li><a class="activo" href="Alertas_Noti.html"><i class="fa-solid fa-bell"></i> Alertas y
+                        Notificaciones</a></li>
             </ul>
 
             <div class="sidebar-usuario">
@@ -61,9 +64,98 @@
                 </div>
             </header>
             <main>
-                
+                <h2>Alertas y Notificaciones</h2>
+                <div class="alertas">
+                    <h3>Alertas Activas</h3>
+                    <hr>
+                    <table>
+                        <tr>
+                            <th>Paciente</th>
+                            <th>Evento</th>
+                            <th>Hora</th>
+                            <th>Prioridad</th>
+                            <th>Estado</th>
+                        </tr>
+                        <tr>
+                            <td>Nombre Paciente</td>
+                            <td>Convulsion</td>
+                            <td>00:00 hs</td>
+                            <td>Alta</td>
+                            <td>Resuelto</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre Paciente</td>
+                            <td>Asistencia</td>
+                            <td>00:00 hs</td>
+                            <td>Baja</td>
+                            <td>En curso</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre Paciente</td>
+                            <td>Convulsion</td>
+                            <td>00:00 hs</td>
+                            <td>Alta</td>
+                            <td>Finalizado</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre Paciente</td>
+                            <td>Convulsion</td>
+                            <td>00:00 hs</td>
+                            <td>Alta</td>
+                            <td>Notificado</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre Paciente</td>
+                            <td>Convulsion</td>
+                            <td>00:00 hs</td>
+                            <td>Alta</td>
+                            <td>Resuelto</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="notificaciones">
+                    <div class="notificacion-header">
+                        <h2>Notificaciones</h2>
+                    </div>
+
+                    <div class="lista-notificaciones">
+                        <div class="notificacion-item no-leida">
+                            <div class="icono-notificacion alerta">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            </div>
+                            <div class="contenido-notificacion">
+                                <strong>Alerta de Urgencia</strong>
+                                <p>El paciente Juan Pérez requiere revisión urgente en la habitación 204.</p>
+                                <span class="tiempo">Hace 5 minutos</span>
+                            </div>
+                        </div>
+
+                        <div class="notificacion-item">
+                            <div class="icono-notificacion info">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </div>
+                            <div class="contenido-notificacion">
+                                <strong>Turno Confirmado</strong>
+                                <p>El turno con el Dr. Gómez ha sido confirmado para las 10:00 AM.</p>
+                                <span class="tiempo">Hace 1 hora</span>
+                            </div>
+                        </div>
+
+                        <div class="notificacion-item">
+                            <div class="icono-notificacion info">
+                                <i class="fa-solid fa-calendar-check"></i>
+                            </div>
+                            <div class="contenido-notificacion">
+                                <strong>Actualización de Sala</strong>
+                                <p>Se ha cambiado la disponibilidad del Consultorio N° 3.</p>
+                                <span class="tiempo">Ayer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </main>
         </div>
     </div>
 </body>
+
 </html>
