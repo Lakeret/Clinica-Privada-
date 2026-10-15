@@ -183,6 +183,11 @@ main > h1 {
     font-weight: bold;
 }
 
+hr{
+    border-color: red;
+    color: red;
+}
+
 .contenedor-turnos {
     background-color: white;
     border-radius: 20px;
