@@ -34,18 +34,42 @@
     <main>
         <section id="mainn">
             <div class="bienvenido">
-                <h2>Bienvenido/a</h2>
-                <p>Ingrese a su cuenta para continuar</p>
-            </div>
-            <div class="login">
-                <h1>INICIAR SESION</h1>
-                <h3>DNI</h3>
-                <input id="dni" type="number" placeholder="Ingrese su DNI" required />
-                <h3>Contraseña</h3>
-                <input id="psw" type="password" placeholder="Ingrese su contraseña" />             
-                <button id="entrar" type="button" onClick="location.href='Inicio.html' ">Iniciar Sesion</button>
-                <p class="recovery">¿Olvidaste tu contraseña?</p>
-            </div>
+            <span class="icono-paciente">
+                <i class="fa-solid fa-user" aria-hidden="true"></i>
+            </span>
+            <h2>Bienvenido</h2>
+            <p>Ingresá a tu cuenta para acceder a tus datos y consultas</p>
+        </div>
+
+        <div class="login">
+            <h1>Iniciar sesión</h1>
+            <p class="login-descripcion">Acceso exclusivo para pacientes ya registrados en nuestra clinica</p>
+
+            <label for="dni">DNI</label>
+            <input
+                id="dni"
+                type="text"
+                inputmode="numeric"
+                placeholder="Ingresá tu DNI"
+                autocomplete="username"
+                required
+            >
+
+            <label for="psw">Contraseña</label>
+            <input
+                id="psw"
+                type="password"
+                placeholder="Ingresá tu contraseña"
+                autocomplete="current-password"
+                required
+            >
+
+            <button id="entrar" type="button" onclick="location.href='Inicio.html'">
+                Iniciar sesión
+            </button>
+
+            <p class="recovery">¿Necesitás ayuda?</p>
+        </div>
         </section>
     </main>
     <footer>
