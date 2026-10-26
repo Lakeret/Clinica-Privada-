@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacientes</title>
+    <link rel="icon" type="image/png" href="/Clinica-Privada-/Front-End Pagina Web - Clinica Privada/Pagina para Empleados de Clinica/Recursos/Logo Clinica Privada.png">
+    <link rel="stylesheet" href="Css/Alertas_Noti.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c7d469fc45.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="contenedor-principal">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="Recursos/Logo Clinica Privada.png" alt="logo" />
+                <div class="texto-logo-sidebar">
+                    <h2>Clinica Privada</h2>
+                    <p>Cuidandote Siempre</p>
+                </div>
+            </div>
+
+            <p class="sidebar-seccion">Menu de Doctor</p>
+            <ul class="sidebar-opciones">
+                <li><a href="Inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="Pacientes.html"><i class="fa-solid fa-user"></i> Pacientes</a></li>
+                <li><a href="Turnos_Salas.html"><i class="fa-solid fa-calendar-days"></i> Turnos y Salas</a></li>
+                <li><a href="Historias.html"><i class="fa-solid fa-book-medical"></i> Historias Clinicas</a></li>
+            </ul>
+
+            <hr class="linea-divisor">
+
+            <p class="sidebar-seccion">Gestion</p>
+            <ul class="sidebar-opciones">
+                <li><a class="activo" href="Alertas_Noti.html"><i class="fa-solid fa-bell"></i> Alertas y
+                        Notificaciones</a></li>
+            </ul>
+
+            <div class="sidebar-usuario">
+                <img src="Recursos/avatar.png" alt="Avatar" class="avatar-doc">
+                <div>
+                    <strong>Nombre Personal</strong>
+                    <p>ROL PERSONAL</p>
+                </div>
+            </div>
+        </aside>
+
+        <div class="contenido-derecha">
+            <header class="header-superior">
+                <div class="buscador">
+                    <input type="text" placeholder="Buscar Paciente">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div class="cerrar">
+                    <a href="./Login.html">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                    </a>
+                </div>
+            </header>
+            <main>
+                <h2>Alertas y Notificaciones</h2>
+                <div class="alertas">
+                    <h3>Alertas Activas</h3>
+                    <hr>
+                    <table>
+                        <tr>
+                            <th>Paciente</th>
+                            <th>Evento</th>
+                            <th>Hora</th>
+                            <th>Prioridad</th>
+                            <th>Estado</th>
+                        </tr>
+                        <tr>
+                            <td>Nombre Paciente</td>
+                            <td>Convulsion</td>
+                            <td>00:00 hs</td>
+                            <td>Alta</td>
+                            <td>Resuelto</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre Paciente</td>
+                            <td>Asistencia</td>
+                            <td>00:00 hs</td>
+                            <td>Baja</td>
+                            <td>En curso</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre Paciente</td>
+                            <td>Convulsion</td>
+                            <td>00:00 hs</td>
+                            <td>Alta</td>
+                            <td>Finalizado</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre Paciente</td>
+                            <td>Convulsion</td>
+                            <td>00:00 hs</td>
+                            <td>Alta</td>
+                            <td>Notificado</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre Paciente</td>
+                            <td>Convulsion</td>
+                            <td>00:00 hs</td>
+                            <td>Alta</td>
+                            <td>Resuelto</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="notificaciones">
+                    <div class="notificacion-header">
+                        <h2>Notificaciones</h2>
+                    </div>
+
+                    <div class="lista-notificaciones">
+                        <div class="notificacion-item no-leida">
+                            <div class="icono-notificacion alerta">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            </div>
+                            <div class="contenido-notificacion">
+                                <strong>Alerta de Urgencia</strong>
+                                <p>El paciente Juan Pérez requiere revisión urgente en la habitación 204.</p>
+                                <span class="tiempo">Hace 5 minutos</span>
+                            </div>
+                        </div>
+
+                        <div class="notificacion-item">
+                            <div class="icono-notificacion info">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </div>
+                            <div class="contenido-notificacion">
+                                <strong>Turno Confirmado</strong>
+                                <p>El turno con el Dr. Gómez ha sido confirmado para las 10:00 AM.</p>
+                                <span class="tiempo">Hace 1 hora</span>
+                            </div>
+                        </div>
+
+                        <div class="notificacion-item">
+                            <div class="icono-notificacion info">
+                                <i class="fa-solid fa-calendar-check"></i>
+                            </div>
+                            <div class="contenido-notificacion">
+                                <strong>Actualización de Sala</strong>
+                                <p>Se ha cambiado la disponibilidad del Consultorio N° 3.</p>
+                                <span class="tiempo">Ayer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>
