@@ -69,99 +69,126 @@ nav ul li a:hover {
 }
 
 #mainn {
-    background-color: #F4F7F9;
+    min-height: 650px;
+    padding: 45px 20px 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(135deg, #eef4f7, #f8fafb);
+}
+
+.bienvenido {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.icono-paciente {
+    display: inline-flex;
+    width: 58px;
+    height: 58px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #123b52;
+    border-radius: 50%;
+    font-size: 23px;
+    box-shadow: 0 5px 14px rgba(18, 59, 82, 0.2);
 }
 
 .bienvenido h2 {
-    font-family: "inter", sans-serif;
+    margin-top: 14px;
+    color: #123b52;
     font-size: 30px;
-    color: #123B52;
-    margin-top: 50px;
-    text-align: center;
 }
 
 .bienvenido p {
-    text-align: center;
-    font-family: "inter", sans-serif;
+    margin-top: 7px;
+    color: #5d707a;
     font-size: 15px;
-    color: #123B52;
 }
 
 .login {
-    border-radius: 20px;
-    margin: 40px 0 80px 0;
-    padding: 30px;
     display: flex;
+    width: 100%;
+    max-width: 430px;
     flex-direction: column;
+    padding: 35px;
     background-color: white;
-    font-family: "inter", sans-serif;
-    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    box-shadow: 0 12px 35px;
 }
 
 .login h1 {
+    color: #123b52;
+    font-size: 23px;
     text-align: center;
-    color: #123B52;
-    font-size: 20px;
-    padding-bottom: 10px;
+    text-transform: uppercase;
 }
 
-.login h3, 
-.login label {
-    color: #222222d3;
-    padding-top: 15px;
-    font-size: 13px;
-    padding-bottom: 8px;
-    display: block;
-}
-
-#dni, #psw, #generos, #roles {
-    border: 1px solid #d1d1d1;
-    background-color: #fdfdfd;
-    border-radius: 10px;
-    height: 48px;
-    width: 350px;
-    padding: 0 15px;
+.login-descripcion {
+    margin-top: 7px;
+    margin-bottom: 12px;
+    color: #71818a;
     font-size: 14px;
-    color: #333;
-    outline: none;
+    text-align: center;
 }
 
-#dni:focus, #psw:focus, #generos:focus, #roles:focus {
-    border-color: #123B52;
+.login label {
+    margin-top: 17px;
+    margin-bottom: 7px;
+    color: #263b47;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#dni,
+#psw {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    color: #263b47;
+    background-color: #f8fafb;
+    border: 1px solid #d5dfe4;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#dni:focus,
+#psw:focus {
+    background-color: white;
+    border-color: #1e5a7a;
+    box-shadow: 0 0 0 3px rgba(30, 90, 122, 0.12);
 }
 
 #entrar {
-    font-family: "inter", sans-serif;
-    height: 50px;
-    width: 350px;
-    margin-top: 30px;
-    border-style: none;
-    border-radius: 10px;
+    height: 49px;
+    margin-top: 25px;
     color: white;
-    background-color: #FF0000;
-    font-weight: bold;
+    background-color: #d71920;
+    border: none;
+    border-radius: 8px;
     font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
 }
 
 #entrar:hover {
-    cursor: pointer;
-    background-color: #881c1c;
+    background-color: #b9151b;
 }
 
 .recovery {
+    margin-top: 18px;
+    color: #1e5a7a;
+    font-size: 14px;
     text-align: center;
-    font-size: 15px;
-    color: #1E5A7A;
-    margin-top: 20px;
+    cursor: pointer;
 }
 
 .recovery:hover {
-    cursor: pointer;
-    color: #123B52;
+    color: #123b52;
     text-decoration: underline;
 }
 
