@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinica Privada</title>
+    <link rel="icon" type="image/png" href="/Pagina Pacientes/recursos/Logo Clinica Privada.png">
+    <link rel="stylesheet" href="/Pagina Pacientes/css/LogIn-pacientes.css">
+    <link rel="stylesheet"
+        href="/Clinica-Privada-/Front-End Pagina Web - Clinica Privada/Pagina Pacientes/LogIn-pacientes.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c7d469fc45.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <div class="encabezado">
+            <div class="logo">
+                <img src="/Pagina Pacientes/recursos/Logo Clinica Privada.png" alt="Logo de Clínica Privada">
+            </div>
+            <div class="texto-encabezado">
+                <h1>CLÍNICA PRIVADA</h1>
+                <p>CUIDÁNDOTE SIEMPRE</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/Pagina Pacientes/index.html">Inicio</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="mainn">
+            <div class="bienvenido">
+                <span class="icono-paciente">
+                    <i class="fa-solid fa-user" aria-hidden="true"></i>
+                </span>
+                <h2>Bienvenido</h2>
+                <p>Ingresá a tu cuenta para acceder a tus datos y consultas</p>
+            </div>
+
+            <div class="login">
+                <h1>Iniciar sesión</h1>
+                <p class="login-descripcion">Acceso exclusivo para pacientes ya registrados en nuestra clinica</p>
+
+                <label for="dni">DNI</label>
+                <input id="dni" type="text" inputmode="numeric" placeholder="Ingresá tu DNI" autocomplete="username"
+                    required>
+
+                <label for="psw">Contraseña</label>
+                <input id="psw" type="password" placeholder="Ingresá tu contraseña" autocomplete="current-password"
+                    required>
+
+                <button id="entrar" type="button" onclick="location.href='Inicio.html'">
+                    Iniciar sesión
+                </button>
+
+                <p class="recovery">¿Necesitás ayuda?</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="texto-logo">
+            <h2>CLÍNICA PRIVADA</h2>
+            <p>CUIDÁNDOTE SIEMPRE</p>
+        </div>
+        <p class="legal">Lorem ipsum dolor sit amet consectetur, adipisicing elit. In reprehenderit quis corrupti? Quasi
+            cumque ut consectetur quas provident incidunt laboriosam delectus nostrum sapiente similique dolorum sed
+            porro, placeat repellendus! Voluptatem, nobis praesentium magni impedit sunt blanditiis vel voluptas
+            repudiandae inventore?</p>
+    </footer>
+    <script src="/Pagina Pacientes/js/login.js"></script>
+</body>
+
+</html>
