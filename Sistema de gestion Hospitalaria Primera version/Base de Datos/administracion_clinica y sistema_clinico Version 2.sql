@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-10-2026 a las 19:44:05
+-- Tiempo de generación: 29-10-2026 a las 01:12:23
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -23,6 +23,154 @@ SET time_zone = "+00:00";
 DROP DATABASE IF EXISTS `administracion_clinica`;
 CREATE DATABASE IF NOT EXISTS `administracion_clinica` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `administracion_clinica`;
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+DROP PROCEDURE IF EXISTS `ActualizarEstadoFactura`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarEstadoFactura` (IN `p_id_factura` INT UNSIGNED)   BEGIN
+ DECLARE v_total DECIMAL(12,2);
+ DECLARE v_pagado DECIMAL(12,2);
+ SELECT importe_total INTO v_total FROM Factura WHERE id_factura=p_id_factura;
+ IF v_total IS NULL THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='La factura no existe'; END IF;
+ SELECT COALESCE((SELECT SUM(monto) FROM Pago_Obra_Social WHERE id_factura=p_id_factura AND estado='REGISTRADO'),0)+
+        COALESCE((SELECT SUM(monto) FROM Pago_Paciente WHERE id_factura=p_id_factura AND estado='REGISTRADO'),0) INTO v_pagado;
+ UPDATE Factura SET estado=CASE WHEN v_pagado<=0 THEN 'PENDIENTE' WHEN v_pagado<v_total THEN 'PARCIAL' ELSE 'PAGADA' END WHERE id_factura=p_id_factura;
+END$$
+
+DROP PROCEDURE IF EXISTS `AnularRecibo`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AnularRecibo` (IN `p_id_recibo` INT UNSIGNED, IN `p_motivo` VARCHAR(500))   BEGIN
+ DECLARE v_estado VARCHAR(20) DEFAULT NULL;
+ DECLARE EXIT HANDLER FOR SQLEXCEPTION BEGIN ROLLBACK; RESIGNAL; END;
+ IF p_motivo IS NULL OR TRIM(p_motivo)='' THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Debe indicar el motivo de anulacion'; END IF;
+ START TRANSACTION;
+ SELECT estado INTO v_estado FROM Recibo_Sueldo WHERE id_recibo=p_id_recibo FOR UPDATE;
+ IF v_estado IS NULL OR v_estado<>'PENDIENTE' THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Solo se pueden anular recibos pendientes'; END IF;
+ INSERT INTO Anulacion_Recibo(id_recibo,motivo) VALUES(p_id_recibo,TRIM(p_motivo));
+ UPDATE Recibo_Sueldo SET estado='ANULADO',fecha_anulacion=CURRENT_TIMESTAMP WHERE id_recibo=p_id_recibo;
+ COMMIT;
+END$$
+
+DROP PROCEDURE IF EXISTS `CrearFactura`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CrearFactura` (IN `p_id_paciente` INT UNSIGNED, IN `p_id_obra_social` INT UNSIGNED, IN `p_importe_total` DECIMAL(12,2), IN `p_porcentaje_cobertura` DECIMAL(5,2))   BEGIN
+ DECLARE v_obra_paciente INT UNSIGNED;
+ DECLARE v_cubierto DECIMAL(12,2) DEFAULT 0;
+ DECLARE v_paciente DECIMAL(12,2);
+ IF p_importe_total<0 OR p_porcentaje_cobertura<0 OR p_porcentaje_cobertura>100 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Importe o porcentaje de cobertura invalido'; END IF;
+ SELECT id_obra_social INTO v_obra_paciente FROM sistema_clinico.Paciente WHERE id_paciente=p_id_paciente;
+ IF v_obra_paciente IS NULL AND NOT EXISTS(SELECT 1 FROM sistema_clinico.Paciente WHERE id_paciente=p_id_paciente) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='El paciente no existe'; END IF;
+ IF p_id_obra_social IS NULL THEN SET p_porcentaje_cobertura=0;
+ ELSE
+  IF v_obra_paciente IS NULL OR v_obra_paciente<>p_id_obra_social THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='La obra social no coincide con la cobertura registrada del paciente'; END IF;
+  IF NOT EXISTS(SELECT 1 FROM sistema_clinico.Obra_Social WHERE id_obra_social=p_id_obra_social AND estado='ACTIVA') THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='La obra social no existe o esta inactiva'; END IF;
+ END IF;
+ SET v_cubierto=ROUND(p_importe_total*p_porcentaje_cobertura/100,2);
+ SET v_paciente=p_importe_total-v_cubierto;
+ INSERT INTO Factura(id_paciente,id_obra_social,importe_total,porcentaje_cobertura,importe_cubierto,importe_paciente,estado)
+ VALUES(p_id_paciente,p_id_obra_social,p_importe_total,p_porcentaje_cobertura,v_cubierto,v_paciente,'PENDIENTE');
+ SELECT LAST_INSERT_ID() AS id_factura;
+END$$
+
+DROP PROCEDURE IF EXISTS `GenerarRecibo`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GenerarRecibo` (IN `p_id_empleado` INT UNSIGNED, IN `p_anio` SMALLINT UNSIGNED, IN `p_mes` TINYINT UNSIGNED, IN `p_ids_bonos` TEXT, IN `p_ids_descuentos` TEXT)   proc: BEGIN
+ DECLARE v_id_sueldo INT UNSIGNED;
+ DECLARE v_sueldo DECIMAL(12,2);
+ DECLARE v_estado_empleado VARCHAR(20);
+ DECLARE v_id_recibo INT UNSIGNED;
+ DECLARE v_bonos DECIMAL(12,2) DEFAULT 0;
+ DECLARE v_descuentos DECIMAL(12,2) DEFAULT 0;
+ DECLARE v_dia_fin DATE;
+ DECLARE v_lista TEXT;
+ DECLARE v_id INT UNSIGNED;
+ DECLARE v_monto DECIMAL(12,2);
+ DECLARE v_coma INT;
+ DECLARE v_total_bruto DECIMAL(12,2);
+ DECLARE v_total_neto DECIMAL(12,2);
+ DECLARE EXIT HANDLER FOR SQLEXCEPTION BEGIN ROLLBACK; RESIGNAL; END;
+ IF p_mes<1 OR p_mes>12 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Mes invalido'; END IF;
+ SET v_dia_fin=LAST_DAY(STR_TO_DATE(CONCAT(p_anio,'-',LPAD(p_mes,2,'0'),'-01'),'%Y-%m-%d'));
+ START TRANSACTION;
+ SELECT estado INTO v_estado_empleado FROM sistema_clinico.Empleado WHERE id_empleado=p_id_empleado FOR UPDATE;
+ IF v_estado_empleado IS NULL THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='El empleado no existe'; END IF;
+ IF v_estado_empleado<>'ACTIVO' THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Solo se pueden generar recibos para empleados activos'; END IF;
+ IF EXISTS(SELECT 1 FROM Recibo_Sueldo WHERE id_empleado=p_id_empleado AND periodo_anio=p_anio AND periodo_mes=p_mes AND estado<>'ANULADO') THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Ya existe un recibo vigente para ese empleado y periodo'; END IF;
+ SELECT id_sueldo,sueldo_base INTO v_id_sueldo,v_sueldo FROM Sueldo WHERE id_empleado=p_id_empleado AND fecha_vigencia<=v_dia_fin AND estado='ACTIVO' ORDER BY fecha_vigencia DESC,id_sueldo DESC LIMIT 1;
+ IF v_id_sueldo IS NULL THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='El empleado no tiene sueldo registrado vigente para ese periodo'; END IF;
+ SET v_total_bruto=v_sueldo;
+ SET v_lista=TRIM(COALESCE(p_ids_bonos,''));
+ WHILE v_lista<>'' DO
+  SET v_coma=LOCATE(',',v_lista);
+  IF v_coma=0 THEN SET v_id=CAST(v_lista AS UNSIGNED); SET v_lista=''; ELSE SET v_id=CAST(LEFT(v_lista,v_coma-1) AS UNSIGNED); SET v_lista=SUBSTRING(v_lista,v_coma+1); END IF;
+  IF v_id=0 OR NOT EXISTS(SELECT 1 FROM Bono WHERE id_bono=v_id) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Uno de los bonos indicados no existe'; END IF;
+  SELECT monto INTO v_monto FROM Bono WHERE id_bono=v_id;
+  SET v_bonos=v_bonos+v_monto;
+ END WHILE;
+ SET v_lista=TRIM(COALESCE(p_ids_descuentos,''));
+ WHILE v_lista<>'' DO
+  SET v_coma=LOCATE(',',v_lista);
+  IF v_coma=0 THEN SET v_id=CAST(v_lista AS UNSIGNED); SET v_lista=''; ELSE SET v_id=CAST(LEFT(v_lista,v_coma-1) AS UNSIGNED); SET v_lista=SUBSTRING(v_lista,v_coma+1); END IF;
+  IF v_id=0 OR NOT EXISTS(SELECT 1 FROM Descuento WHERE id_descuento=v_id) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Uno de los descuentos indicados no existe'; END IF;
+  SELECT monto INTO v_monto FROM Descuento WHERE id_descuento=v_id;
+  SET v_descuentos=v_descuentos+v_monto;
+ END WHILE;
+ SET v_total_neto=v_total_bruto+v_bonos-v_descuentos;
+ IF v_total_neto<0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Los descuentos no pueden superar el total bruto mas los bonos'; END IF;
+ INSERT INTO Recibo_Sueldo(id_sueldo,id_empleado,periodo_anio,periodo_mes,total_bruto,total_descuentos,total_bonos,total_neto)
+ VALUES(v_id_sueldo,p_id_empleado,p_anio,p_mes,v_total_bruto,v_descuentos,v_bonos,v_total_neto);
+ SET v_id_recibo=LAST_INSERT_ID();
+ SET v_lista=TRIM(COALESCE(p_ids_bonos,''));
+ WHILE v_lista<>'' DO
+  SET v_coma=LOCATE(',',v_lista);
+  IF v_coma=0 THEN SET v_id=CAST(v_lista AS UNSIGNED); SET v_lista=''; ELSE SET v_id=CAST(LEFT(v_lista,v_coma-1) AS UNSIGNED); SET v_lista=SUBSTRING(v_lista,v_coma+1); END IF;
+  SELECT monto INTO v_monto FROM Bono WHERE id_bono=v_id;
+  INSERT INTO Detalle_Bono(id_recibo,id_bono,importe) VALUES(v_id_recibo,v_id,v_monto);
+ END WHILE;
+ SET v_lista=TRIM(COALESCE(p_ids_descuentos,''));
+ WHILE v_lista<>'' DO
+  SET v_coma=LOCATE(',',v_lista);
+  IF v_coma=0 THEN SET v_id=CAST(v_lista AS UNSIGNED); SET v_lista=''; ELSE SET v_id=CAST(LEFT(v_lista,v_coma-1) AS UNSIGNED); SET v_lista=SUBSTRING(v_lista,v_coma+1); END IF;
+  SELECT monto INTO v_monto FROM Descuento WHERE id_descuento=v_id;
+  INSERT INTO Detalle_Descuento(id_recibo,id_descuento,importe) VALUES(v_id_recibo,v_id,v_monto);
+ END WHILE;
+ COMMIT;
+ SELECT * FROM Recibo_Sueldo WHERE id_recibo=v_id_recibo;
+END$$
+
+DROP PROCEDURE IF EXISTS `RegistrarPagoObraSocial`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `RegistrarPagoObraSocial` (IN `p_id_factura` INT UNSIGNED, IN `p_monto` DECIMAL(12,2))   BEGIN
+ IF p_monto<=0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='El pago debe ser mayor que cero'; END IF;
+ IF NOT EXISTS(SELECT 1 FROM Factura WHERE id_factura=p_id_factura AND id_obra_social IS NOT NULL) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='La factura no tiene obra social asociada'; END IF;
+ INSERT INTO Pago_Obra_Social(id_factura,monto) VALUES(p_id_factura,p_monto);
+END$$
+
+DROP PROCEDURE IF EXISTS `RegistrarPagoPaciente`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `RegistrarPagoPaciente` (IN `p_id_factura` INT UNSIGNED, IN `p_monto` DECIMAL(12,2))   BEGIN
+ IF p_monto<=0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='El pago debe ser mayor que cero'; END IF;
+ IF NOT EXISTS(SELECT 1 FROM Factura WHERE id_factura=p_id_factura) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='La factura no existe'; END IF;
+ INSERT INTO Pago_Paciente(id_factura,monto) VALUES(p_id_factura,p_monto);
+END$$
+
+DROP PROCEDURE IF EXISTS `RegistrarPagoSueldo`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `RegistrarPagoSueldo` (IN `p_id_recibo` INT UNSIGNED, IN `p_banco_destino` VARCHAR(120))   BEGIN
+ DECLARE v_estado VARCHAR(20) DEFAULT NULL;
+ DECLARE EXIT HANDLER FOR SQLEXCEPTION BEGIN ROLLBACK; RESIGNAL; END;
+ START TRANSACTION;
+ SELECT estado INTO v_estado FROM Recibo_Sueldo WHERE id_recibo=p_id_recibo FOR UPDATE;
+ IF v_estado IS NULL OR v_estado<>'PENDIENTE' THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='Solo se pueden pagar recibos pendientes'; END IF;
+ UPDATE Recibo_Sueldo SET estado='PAGADO',fecha_pago=CURRENT_TIMESTAMP,banco_destino=p_banco_destino WHERE id_recibo=p_id_recibo;
+ COMMIT;
+END$$
+
+DROP PROCEDURE IF EXISTS `RegistrarSueldo`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `RegistrarSueldo` (IN `p_id_empleado` INT UNSIGNED, IN `p_sueldo_base` DECIMAL(12,2), IN `p_fecha_vigencia` DATE, IN `p_estado` VARCHAR(20))   BEGIN
+ IF NOT EXISTS(SELECT 1 FROM sistema_clinico.Empleado WHERE id_empleado=p_id_empleado) THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='El empleado no existe en sistema_clinico'; END IF;
+ IF p_sueldo_base<0 THEN SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='El sueldo base no puede ser negativo'; END IF;
+ INSERT INTO Sueldo(id_empleado,sueldo_base,fecha_vigencia,estado) VALUES(p_id_empleado,p_sueldo_base,p_fecha_vigencia,COALESCE(NULLIF(p_estado,''),'ACTIVO'));
+ SELECT LAST_INSERT_ID() AS id_sueldo;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -703,6 +851,109 @@ DROP DATABASE IF EXISTS `sistema_clinico`;
 CREATE DATABASE IF NOT EXISTS `sistema_clinico` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `sistema_clinico`;
 
+DELIMITER $$
+--
+-- Procedimientos
+--
+DROP PROCEDURE IF EXISTS `AgregarPaciente`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AgregarPaciente` (IN `p_id_obra_social` INT UNSIGNED, IN `p_dni` VARCHAR(20), IN `p_nombre` VARCHAR(80), IN `p_apellido` VARCHAR(80), IN `p_fecha_nacimiento` DATE, IN `p_sexo` VARCHAR(20), IN `p_telefono` VARCHAR(30), IN `p_email` VARCHAR(150), IN `p_direccion` VARCHAR(200))   BEGIN
+ INSERT INTO Paciente(id_obra_social,dni,nombre,apellido,fecha_nacimiento,sexo,telefono,email,direccion)
+ VALUES(p_id_obra_social,p_dni,p_nombre,p_apellido,p_fecha_nacimiento,COALESCE(NULLIF(p_sexo,''),'NO_ESPECIFICADO'),p_telefono,p_email,p_direccion);
+ SELECT LAST_INSERT_ID() AS id_paciente;
+END$$
+
+DROP PROCEDURE IF EXISTS `BuscarHistoriaClinica`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarHistoriaClinica` (IN `p_id_paciente` INT UNSIGNED)   BEGIN
+ SELECT hc.id_historia_clinica, hc.fecha, hc.hora, hc.tipo_registro, hc.diagnostico, hc.tratamiento, hc.observaciones,
+        'INTERNACION' AS origen, i.id_internacion AS id_origen, i.id_paciente, hc.id_empleado
+ FROM Historia_Clinica hc JOIN Internacion i ON i.id_internacion=hc.id_internacion WHERE i.id_paciente=p_id_paciente
+ UNION ALL
+ SELECT hc.id_historia_clinica, hc.fecha, hc.hora, hc.tipo_registro, hc.diagnostico, hc.tratamiento, hc.observaciones,
+        'CONSULTA' AS origen, c.id_consulta AS id_origen, c.id_paciente, hc.id_empleado
+ FROM Historia_Clinica hc JOIN Consulta c ON c.id_consulta=hc.id_consulta WHERE c.id_paciente=p_id_paciente
+ ORDER BY fecha DESC, hora DESC;
+END$$
+
+DROP PROCEDURE IF EXISTS `BuscarPaciente`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BuscarPaciente` (IN `p_dni` VARCHAR(20))   BEGIN
+ SELECT p.*, o.nombre AS obra_social FROM Paciente p LEFT JOIN Obra_Social o ON o.id_obra_social=p.id_obra_social WHERE p.dni=p_dni;
+END$$
+
+DROP PROCEDURE IF EXISTS `CrearTurno`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CrearTurno` (IN `p_id_paciente` INT, IN `p_id_medico` INT, IN `p_fecha` DATE, IN `p_hora` TIME, IN `p_motivo` VARCHAR(250))   BEGIN
+    DECLARE v_existe INT DEFAULT 0;
+
+    IF p_fecha IS NULL OR p_fecha < CURDATE() THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'La fecha del turno no puede ser anterior a hoy';
+    END IF;
+
+    IF p_hora IS NULL
+       OR MINUTE(p_hora) NOT IN (0, 30)
+       OR SECOND(p_hora) <> 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El turno debe comenzar en un intervalo de 30 minutos';
+    END IF;
+
+    SELECT COUNT(*)
+    INTO v_existe
+    FROM Paciente
+    WHERE id_paciente = p_id_paciente;
+
+    IF v_existe = 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El paciente no existe';
+    END IF;
+
+    SELECT COUNT(*)
+    INTO v_existe
+    FROM Medico
+    WHERE id_empleado = p_id_medico;
+
+    IF v_existe = 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El empleado no es un medico registrado';
+    END IF;
+
+    SELECT COUNT(*)
+    INTO v_existe
+    FROM Turno
+    WHERE fecha = p_fecha
+      AND estado IN ('PENDIENTE', 'CONFIRMADO')
+      AND (
+          id_empleado = p_id_medico
+          OR id_paciente = p_id_paciente
+      )
+      AND p_hora < ADDTIME(hora, '00:30:00')
+      AND hora < ADDTIME(p_hora, '00:30:00');
+
+    IF v_existe > 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El medico o el paciente ya tiene un turno superpuesto';
+    END IF;
+
+    INSERT INTO Turno (
+        id_paciente,
+        id_empleado,
+        fecha,
+        hora,
+        estado,
+        motivo
+    )
+    VALUES (
+        p_id_paciente,
+        p_id_medico,
+        p_fecha,
+        p_hora,
+        'PENDIENTE',
+        p_motivo
+    );
+
+    SELECT LAST_INSERT_ID() AS id_turno;
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -772,7 +1023,11 @@ INSERT INTO `auditoria_bd` (`id_auditoria`, `tabla_afectada`, `id_registro`, `op
 (47, 'Paciente', '4', 'UPDATE', '2026-10-28 15:12:08'),
 (48, 'Paciente', '4', 'DELETE', '2026-10-28 15:13:38'),
 (49, 'Usuario', '1', 'INSERT', '2026-10-28 15:27:11'),
-(50, 'Usuario', '1', 'UPDATE', '2026-10-28 15:38:01');
+(50, 'Usuario', '1', 'UPDATE', '2026-10-28 15:38:01'),
+(51, 'Usuario', '1', 'DELETE', '2026-10-28 15:47:45'),
+(52, 'Paciente', '5', 'INSERT', '2026-10-28 16:15:17'),
+(53, 'Historia_Clinica', '4', 'INSERT', '2026-10-28 17:28:26'),
+(54, 'Turno', '5', 'INSERT', '2026-10-28 17:33:56');
 
 -- --------------------------------------------------------
 
@@ -990,7 +1245,8 @@ CREATE TABLE `historia_clinica` (
 
 INSERT INTO `historia_clinica` (`id_historia_clinica`, `id_internacion`, `id_consulta`, `id_empleado`, `fecha`, `hora`, `tipo_registro`, `diagnostico`, `tratamiento`, `observaciones`) VALUES
 (1, NULL, 1, 1, '2026-10-23', '20:07:54', 'DIAGNOSTICO', 'Diagnostico de prueba', 'Tratamiento de prueba', 'Registro creado para verificar la relacion con la consulta'),
-(2, NULL, 1, 1, '2026-10-27', '19:09:55', 'EVOLUCION', 'Prueba temporal de validacion', NULL, 'Prueba de auditoria UPDATE');
+(2, NULL, 1, 1, '2026-10-27', '19:09:55', 'EVOLUCION', 'Prueba temporal de validacion', NULL, 'Prueba de auditoria UPDATE'),
+(4, 1, NULL, 1, '2026-10-28', '17:28:26', 'EVOLUCION', 'PRUEBA TEMPORAL DEL PROCEDIMIENTO', NULL, 'Registro temporal para verificar BuscarHistoriaClinica');
 
 --
 -- Disparadores `historia_clinica`
@@ -1255,7 +1511,8 @@ CREATE TABLE `paciente` (
 
 INSERT INTO `paciente` (`id_paciente`, `id_obra_social`, `dni`, `nombre`, `apellido`, `fecha_nacimiento`, `sexo`, `telefono`, `email`, `direccion`) VALUES
 (1, NULL, '99000001', 'Paciente', 'Prueba', NULL, 'NO_ESPECIFICADO', NULL, NULL, NULL),
-(3, NULL, '99000003', 'Paciente', 'Nuevo', NULL, 'NO_ESPECIFICADO', NULL, NULL, NULL);
+(3, NULL, '99000003', 'Paciente', 'Nuevo', NULL, 'NO_ESPECIFICADO', NULL, NULL, NULL),
+(5, NULL, '99999993', 'Paciente', 'Prueba SP', NULL, 'NO_ESPECIFICADO', NULL, NULL, NULL);
 
 --
 -- Disparadores `paciente`
@@ -1479,7 +1736,8 @@ CREATE TABLE `turno` (
 INSERT INTO `turno` (`id_turno`, `id_paciente`, `id_empleado`, `fecha`, `hora`, `estado`, `motivo`) VALUES
 (1, 1, 1, '2026-10-24', '09:00:00', 'ATENDIDO', 'Turno de prueba'),
 (2, 1, 1, '2026-10-24', '09:15:00', 'PENDIENTE', 'Prueba de trigger UPDATE'),
-(4, 1, 1, '2026-10-27', '12:00:00', 'CANCELADO', 'Prueba turno cancelado para Consulta');
+(4, 1, 1, '2026-10-27', '12:00:00', 'CANCELADO', 'Prueba turno cancelado para Consulta'),
+(5, 1, 1, '2026-10-29', '10:00:00', 'PENDIENTE', 'Prueba temporal del procedimiento CrearTurno');
 
 --
 -- Disparadores `turno`
@@ -1546,13 +1804,6 @@ CREATE TABLE `usuario` (
   `contrasena` varchar(255) NOT NULL COMMENT 'Hash generado por el backend, nunca texto plano',
   `estado` enum('ACTIVO','INACTIVO') NOT NULL DEFAULT 'ACTIVO'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `usuario`
---
-
-INSERT INTO `usuario` (`id_usuario`, `id_empleado`, `id_paciente`, `contrasena`, `estado`) VALUES
-(1, 1, NULL, 'HASH_PRUEBA_TRIGGER', 'INACTIVO');
 
 --
 -- Disparadores `usuario`
@@ -1743,7 +1994,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `auditoria_bd`
 --
 ALTER TABLE `auditoria_bd`
-  MODIFY `id_auditoria` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id_auditoria` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `consulta`
@@ -1779,7 +2030,7 @@ ALTER TABLE `habitacion`
 -- AUTO_INCREMENT de la tabla `historia_clinica`
 --
 ALTER TABLE `historia_clinica`
-  MODIFY `id_historia_clinica` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_historia_clinica` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `internacion`
@@ -1803,7 +2054,7 @@ ALTER TABLE `obra_social`
 -- AUTO_INCREMENT de la tabla `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `id_paciente` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_paciente` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `receta`
@@ -1833,7 +2084,7 @@ ALTER TABLE `stock_medicamentos`
 -- AUTO_INCREMENT de la tabla `turno`
 --
 ALTER TABLE `turno`
-  MODIFY `id_turno` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_turno` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
