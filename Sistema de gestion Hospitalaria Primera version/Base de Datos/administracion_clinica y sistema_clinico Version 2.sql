@@ -1231,8 +1231,8 @@ CREATE TABLE `historia_clinica` (
   `id_internacion` int(10) UNSIGNED DEFAULT NULL,
   `id_consulta` int(10) UNSIGNED DEFAULT NULL,
   `id_empleado` int(10) UNSIGNED NOT NULL COMMENT 'Empleado que registra la evolución',
-  `fecha` date NOT NULL DEFAULT curdate(),
-  `hora` time NOT NULL DEFAULT curtime(),
+  `fecha` date NOT NULL DEFAULT (CURRENT_DATE),
+  `hora` time NOT NULL DEFAULT (CURRENT_TIME),
   `tipo_registro` enum('DIAGNOSTICO','EVOLUCION','ENFERMERIA','SIGNOS_VITALES','MEDICACION','OTRO') NOT NULL,
   `diagnostico` text DEFAULT NULL,
   `tratamiento` text DEFAULT NULL,
@@ -1587,8 +1587,8 @@ CREATE TABLE `registro_medicacion` (
   `id_medicamento` int(10) UNSIGNED NOT NULL,
   `id_empleado` int(10) UNSIGNED NOT NULL COMMENT 'Empleado que administra; validación de rol en backend',
   `id_stock` int(10) UNSIGNED NOT NULL,
-  `fecha` date NOT NULL DEFAULT curdate(),
-  `hora` time NOT NULL DEFAULT curtime(),
+  `fecha` date NOT NULL DEFAULT (CURRENT_DATE),
+  `hora` time NOT NULL DEFAULT (CURRENT_TIME),
   `dosis_administrada` varchar(80) NOT NULL,
   `observaciones` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
