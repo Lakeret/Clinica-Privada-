@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Paciente - Mis Datos | Clínica Privada</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#E53935',
+                            darkRed: '#C62828',
+                            lightRed: '#FFEBEE',
+                            sidebar: '#1E222B',
+                            sidebarActive: '#E53935',
+                            sidebarHover: '#2A2F3D',
+                            bg: '#F4F6F9',
+                            cardBg: '#FFFFFF',
+                            textPrimary: '#2C3E50',
+                            textSecondary: '#7F8C8D'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F4F6F9;
+        }
+        /* Style scrollbar for sidebar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1E222B;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #3A3F4D;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-brand-bg text-slate-800 antialiased min-h-screen flex flex-col md:flex-row">
+
+    <!-- Mobile Header/Toggle -->
+    <div class="md:hidden bg-brand-sidebar text-white p-4 flex justify-between items-center z-50">
+        <div class="flex items-center space-x-3">
+            <div class="bg-brand-red text-white p-2 rounded-lg flex items-center justify-center w-8 h-8 font-bold">
+                <i class="fa-solid font-bold fa-plus text-lg"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-sm tracking-wide">Clínica Privada</h1>
+                <p class="text-[10px] text-gray-400">Portal del Paciente</p>
+            </div>
+        </div>
+        <button id="mobileMenuBtn" class="text-gray-300 focus:outline-none">
+            <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+    </div>
+
+    <!-- SIDEBAR IGUAL A LA IMAGEN -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-64 bg-brand-sidebar text-gray-300 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col justify-between shadow-xl md:static">
+        
+        <div>
+            <!-- Header Sidebar -->
+            <div class="p-5 flex items-center space-x-3 border-b border-gray-800">
+                <div class="bg-brand-red text-white p-2 rounded-lg flex items-center justify-center w-9 h-9 font-bold shadow-md">
+                    <i class="fa-solid fa-plus text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-white text-base tracking-wide leading-tight">Clínica Privada</h1>
+                    <p class="text-xs text-gray-400">Atención e Innovación</p>
+                </div>
+            </div>
+
+            <!-- Navegación -->
+            <nav class="mt-6 px-3 space-y-1.5">
+                <!-- Inicio -->
+                <a href="inicio.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:bg-brand-sidebarHover hover:text-white transition-colors duration-150">
+                    <i class="fa-solid fa-house w-5 text-center text-gray-400"></i>
+                    <span>Inicio</span>
+                </a>
+
+                <!-- Mis Datos (ACTIVO IGUAL A IMAGEN) -->
+                <a href="mis-datos.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-sm font-semibold text-white bg-brand-red shadow-md transition-colors duration-150">
+                    <i class="fa-solid fa-user w-5 text-center text-white"></i>
+                    <span>Mis Datos</span>
+                </a>
+
+                <!-- Mis Turnos -->
+                <a href="mis-turnos.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:bg-brand-sidebarHover hover:text-white transition-colors duration-150">
+                    <i class="fa-solid fa-calendar-check w-5 text-center text-gray-400"></i>
+                    <span>Mis Turnos</span>
+                </a>
+
+                <!-- Mis Recetas y Estudios -->
+                <a href="recetas-estudios.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:bg-brand-sidebarHover hover:text-white transition-colors duration-150">
+                    <i class="fa-solid fa-file-medical w-5 text-center text-gray-400"></i>
+                    <span>Mis Recetas y Estudios</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Footer Sidebar (Usuario Logueado) -->
+        <div class="p-4 border-t border-gray-800 bg-[#171A21]">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-full bg-slate-700 flex items-center justify-center text-white font-semibold border border-gray-600">
+                    JD
+                </div>
+                <div class="flex-1 min-w-0">
+                    <p class="text-sm font-medium text-white truncate" id="sidebarUserName">Juan Domingo Pérez</p>
+                    <p class="text-xs text-gray-400 truncate">DNI: 38.450.912</p>
+                </div>
+                <a href="login.html" title="Cerrar Sesión" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Overlay for mobile sidebar -->
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-30 hidden md:hidden"></div>
+
+    <!-- ÁREA PRINCIPAL -->
+    <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+        <!-- HEADER SUPERIOR EXACTO A LA IMAGEN -->
+        <header class="bg-white border-b border-red-500/80 px-6 py-3 flex items-center justify-between shadow-xs">
+            <!-- Buscador -->
+            <div class="relative w-full max-w-xs md:max-w-md">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
+                    <i class="fa-solid fa-magnifying-glass text-sm"></i>
+                </span>
+                <input type="text" placeholder="Buscar información médica o servicios..." class="w-full pl-9 pr-4 py-1.5 bg-gray-100 border border-gray-200 rounded-md text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-brand-red focus:bg-white transition-all">
+            </div>
+
+            <!-- Fecha y Notificaciones -->
+            <div class="flex items-center space-x-4">
+                <span class="hidden sm:inline text-xs md:text-sm text-gray-500 font-medium" id="currentDate">Martes 1 de Septiembre</span>
+                <button class="relative p-2 text-gray-500 hover:text-brand-red transition-colors">
+                    <i class="fa-regular fa-bell text-lg"></i>
+                    <span class="absolute top-1 right-1 w-2 h-2 bg-brand-red rounded-full"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- LÍNEA ROJA DE ACENTO DE LA CLINICA -->
+        <div class="h-0.5 bg-gradient-to-r from-brand-red via-red-400 to-transparent w-full"></div>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="flex-1 overflow-y-auto p-4 md:p-8 space-y-6">
+
+            <!-- Encabezado de la Sección -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800 tracking-tight">Bienvenida/o, Juan</h2>
+                    <p class="text-xs md:text-sm text-gray-500 mt-1">Gestione sus datos personales, información de contacto y detalles de su cobertura médica.</p>
+                </div>
+                <div class="flex space-x-3">
+                    <button onclick="openModal()" class="px-4 py-2 bg-brand-red hover:bg-brand-darkRed text-white rounded-lg text-sm font-medium shadow-sm flex items-center space-x-2 transition-all">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        <span>Editar Datos de Contacto</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- TARJETAS DE MÉTRICAS / INFORMACIÓN RÁPIDA (Estilo de la imagen) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                <!-- Card 1 -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div class="text-gray-500 text-xs font-semibold uppercase tracking-wider">Documento (DNI)</div>
+                    <div class="mt-2 text-2xl font-bold text-gray-800" id="cardDNI">38.450.912</div>
+                    <div class="mt-2 text-[11px] text-emerald-600 font-medium flex items-center">
+                        <i class="fa-solid fa-circle-check mr-1 text-[10px]"></i> Identidad Verificada
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div class="text-gray-500 text-xs font-semibold uppercase tracking-wider">Obra Social / Prepaga</div>
+                    <div class="mt-2 text-2xl font-bold text-gray-800 truncate" id="cardPrepaga">OSDE</div>
+                    <div class="mt-2 text-[11px] text-gray-500">Plan 310 - Adherido</div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div class="text-gray-500 text-xs font-semibold uppercase tracking-wider">N° de Afiliado</div>
+                    <div class="mt-2 text-2xl font-bold text-gray-800" id="cardAfiliado">2-4910293-01</div>
+                    <div class="mt-2 text-[11px] text-emerald-600 font-medium">Titular Directo</div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div class="text-gray-500 text-xs font-semibold uppercase tracking-wider">Estado de Cobertura</div>
+                    <div class="mt-2 flex items-center space-x-2">
+                        <span class="inline-block w-3 h-3 bg-emerald-500 rounded-full animate-pulse"></span>
+                        <span class="text-2xl font-bold text-gray-800">Activa</span>
+                    </div>
+                    <div class="mt-2 text-[11px] text-gray-500">Al día (Última val. 01/09)</div>
+                </div>
+
+            </div>
+
+            <!-- SECCIONES DE DETALLES DEL PACIENTE -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                <!-- Columna Izquierda: Datos Personales (2 cols en Pantalla Grande) -->
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <!-- Card 1: Información Personal -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                            <h3 class="font-bold text-gray-800 flex items-center space-x-2">
+                                <i class="fa-solid fa-id-card text-brand-red"></i>
+                                <span>Información Personal</span>
+                            </h3>
+                            <span class="text-xs bg-slate-100 text-slate-600 font-medium px-2.5 py-1 rounded-full">Ficha Médica N° 9942</span>
+                        </div>
+                        <div class="p-6 grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 text-sm">
+                            <div>
+                                <span class="block text-xs font-medium text-gray-400 uppercase">Nombre Completo</span>
+                                <span class="font-medium text-gray-800 text-base" id="valNombre">Juan Domingo Pérez</span>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-medium text-gray-400 uppercase">Fecha de Nacimiento</span>
+                                <span class="font-medium text-gray-800 text-base" id="valFechaNac">14 / 05 / 1994 (30 años)</span>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-medium text-gray-400 uppercase">Tipo y N° Documento</span>
+                                <span class="font-medium text-gray-800" id="valDNI">DNI 38.450.912</span>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-medium text-gray-400 uppercase">Nacionalidad</span>
+                                <span class="font-medium text-gray-800">Argentina</span>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-medium text-gray-400 uppercase">Género Biológico</span>
+                                <span class="font-medium text-gray-800">Masculino</span>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-medium text-gray-400 uppercase">Grupo Sanguíneo</span>
+                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-red-100 text-red-800 mt-0.5">
+                                    O Positivo (O+)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Contacto y Domicilio -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                            <h3 class="font-bold text-gray-800 flex items-center space-x-2">
+                                <i class="fa-solid fa-location-dot text-brand-red"></i>
+                                <span>Contacto y Domicilio</span>
+                            </h3>
+                            <button onclick="openModal()" class="text-xs text-brand-red hover:underline font-medium">Actualizar</button>
+                        </div>
+                        <div class="p-6 grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 text-sm">
+                            <div>
+                                <span class="block text-xs font-medium text-gray-400 uppercase">Correo Electrónico</span>
+                                <span class="font-medium text-gray-800" id="valEmail">juan.perez@email.com</span>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-medium text-gray-400 uppercase">Teléfono Móvil</span>
+                                <span class="font-medium text-gray-800" id="valTel">+54 9 11 4920-1122</span>
+                            </div>
+                            <div class="sm:col-span-2">
+                                <span class="block text-xs font-medium text-gray-400 uppercase">Domicilio Declarado</span>
+                                <span class="font-medium text-gray-800" id="valDireccion">Av. Corrientes 2450, Piso 4, Depto B</span>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-medium text-gray-400 uppercase">Localidad / Provincia</span>
+                                <span class="font-medium text-gray-800" id="valLocalidad">CABA, Buenos Aires</span>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-medium text-gray-400 uppercase">Código Postal</span>
+                                <span class="font-medium text-gray-800" id="valCP">C1046AAP</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Columna Derecha: Cobertura & Emergencia (1 col) -->
+                <div class="space-y-6">
+
+                    <!-- Card Cobertura Médica -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="px-6 py-4 border-b border-gray-100 bg-gray-50/50">
+                            <h3 class="font-bold text-gray-800 flex items-center space-x-2">
+                                <i class="fa-solid fa-shield-halved text-brand-red"></i>
+                                <span>Cobertura Médica</span>
+                            </h3>
+                        </div>
+                        <div class="p-6 space-y-4 text-sm">
+                            <div>
+                                <span class="block text-xs font-medium text-gray-400 uppercase">Prestador</span>
+                                <div class="flex items-center space-x-2 mt-1">
+                                    <div class="w-8 h-8 rounded bg-blue-50 text-blue-600 font-bold flex items-center justify-center text-xs">
+                                        OSDE
+                                    </div>
+                                    <span class="font-semibold text-gray-800 text-base" id="valPrepaga2">OSDE Binario</span>
+                                </div>
+                            </div>
+                            <div class="pt-2 border-t border-gray-100">
+                                <span class="block text-xs font-medium text-gray-400 uppercase">Plan Contratado</span>
+                                <span class="font-medium text-gray-800">Plan 310 (Global)</span>
+                            </div>
+                            <div class="pt-2 border-t border-gray-100">
+                                <span class="block text-xs font-medium text-gray-400 uppercase">Número de Credencial</span>
+                                <span class="font-mono text-gray-800 font-semibold" id="valAfiliado2">2-4910293-01</span>
+                            </div>
+                            <div class="pt-2 border-t border-gray-100">
+                                <span class="block text-xs font-medium text-gray-400 uppercase">Condición I.V.A.</span>
+                                <span class="font-medium text-gray-800">Consumidor Final</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Contacto de Emergencia -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="px-6 py-4 border-b border-gray-100 bg-gray-50/50">
+                            <h3 class="font-bold text-gray-800 flex items-center space-x-2">
+                                <i class="fa-solid fa-heart-pulse text-brand-red"></i>
+                                <span>Contacto de Emergencia</span>
+                            </h3>
+                        </div>
+                        <div class="p-6 space-y-3 text-sm">
+                            <div>
+                                <span class="block text-xs font-medium text-gray-400 uppercase">Nombre y Parentesco</span>
+                                <span class="font-semibold text-gray-800" id="valEmergenciaNombre">Maria Laura Pérez (Esposa)</span>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-medium text-gray-400 uppercase">Teléfono de URGENCIA</span>
+                                <span class="font-medium text-brand-red font-semibold text-base" id="valEmergenciaTel">+54 9 11 5821-9900</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <div id="editModal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden transition-opacity">
+        <div class="bg-white rounded-xl shadow-2xl max-w-md w-full overflow-hidden transform transition-all">
+            <div class="px-6 py-4 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 flex items-center space-x-2">
+                    <i class="fa-solid fa-user-pen text-brand-red"></i>
+                    <span>Editar Datos de Contacto</span>
+                </h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            
+            <form id="editForm" class="p-6 space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-gray-600 mb-1">Correo Electrónico</label>
+                    <input type="email" id="inputEmail" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-1 focus:ring-brand-red focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-600 mb-1">Teléfono Móvil</label>
+                    <input type="text" id="inputTel" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-1 focus:ring-brand-red focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-600 mb-1">Domicilio</label>
+                    <input type="text" id="inputDireccion" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-1 focus:ring-brand-red focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-600 mb-1">Contacto de Emergencia (Nombre y Tel)</label>
+                    <input type="text" id="inputEmergencia" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-1 focus:ring-brand-red focus:outline-none">
+                </div>
+
+                <div class="pt-4 flex justify-end space-x-3 border-t border-gray-100">
+                    <button type="button" onclick="closeModal()" class="px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-50 font-medium">Cancelar</button>
+                    <button type="submit" class="px-4 py-2 bg-brand-red hover:bg-brand-darkRed text-white rounded-lg text-sm font-medium shadow-sm">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-5 right-5 bg-gray-900 text-white px-4 py-3 rounded-lg shadow-xl flex items-center space-x-3 translate-y-20 opacity-0 transition-all duration-300 z-50">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+        <span class="text-sm font-medium">¡Datos actualizados con éxito!</span>
+    </div>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('-translate-x-full');
+            sidebarOverlay.classList.toggle('hidden');
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleSidebar);
+        sidebarOverlay.addEventListener('click', toggleSidebar);
+
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const today = new Date();
+        document.getElementById('currentDate').textContent = today.toLocaleDateString('es-ES', options);
+
+        function openModal() {
+            document.getElementById('inputEmail').value = document.getElementById('valEmail').textContent;
+            document.getElementById('inputTel').value = document.getElementById('valTel').textContent;
+            document.getElementById('inputDireccion').value = document.getElementById('valDireccion').textContent;
+            document.getElementById('inputEmergencia').value = document.getElementById('valEmergenciaNombre').textContent + " - " + document.getElementById('valEmergenciaTel').textContent;
+            
+            document.getElementById('editModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('editModal').classList.add('hidden');
+        }
+
+        document.getElementById('editForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            document.getElementById('valEmail').textContent = document.getElementById('inputEmail').value;
+            document.getElementById('valTel').textContent = document.getElementById('inputTel').value;
+            document.getElementById('valDireccion').textContent = document.getElementById('inputDireccion').value;
+            
+            closeModal();
+            showToast();
+        });
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
+
+ <main>
+        <section class="bienvenida-seccion">
+            <div>
+                <h1>Mis Datos Personales</h1>
+                <p style="color: #6b7280; font-size: 13px; margin-top: 4px;">Consulta y actualiza la información de tu perfil médico</p>
+            </div>
+            <div class="fecha-badge">Martes 1 de Septiembre</div>
+        </section>
+
+        <section class="cuadricula">
+            <div class="tarjeta">
+                <h3>Documento (DNI)</h3>
+                <p id="resumenDNI">38.450.912</p>
+                <span class="subtexto">✓ Verificado</span>
+            </div>
+            <div class="tarjeta">
+                <h3>Obra Social / Prepaga</h3>
+                <p id="resumenPrepaga">OSDE</p>
+                <span class="subtexto" style="color:#6b7280;">Plan 310</span>
+            </div>
+            <div class="tarjeta">
+                <h3>N° Afiliado</h3>
+                <p id="resumenAfiliado">2-4910293-01</p>
+                <span class="subtexto">Titular Directo</span>
+            </div>
+            <div class="tarjeta">
+                <h3>Estado Cobertura</h3>
+                <p style="color: #10b981;">Activa</p>
+                <span class="subtexto" style="color:#6b7280;">Al día</span>
+            </div>
+        </section>
+
+        <section class="datos-contenedor">
+            <div class="datos-header">
+                <h2><i class="fa-solid fa-id-card"></i> Información Personal</h2>
+            </div>
+            <div class="datos-cuerpo">
+                <div class="datos-grupo">
+                    <label>Nombre Completo</label>
+                    <p>Juan Domingo Pérez</p>
+                </div>
+                <div class="datos-grupo">
+                    <label>Fecha de Nacimiento</label>
+                    <p>14 / 05 / 1994 (30 años)</p>
+                </div>
+                <div class="datos-grupo">
+                    <label>Documento</label>
+                    <p>DNI 38.450.912</p>
+                </div>
+                <div class="datos-grupo">
+                    <label>Nacionalidad</label>
+                    <p>Argentina</p>
+                </div>
+                <div class="datos-grupo">
+                    <label>Grupo Sanguíneo</label>
+                    <p>O Positivo (O+)</p>
+                </div>
+                <div class="datos-grupo">
+                    <label>Género</label>
+                    <p>Masculino</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="datos-contenedor">
+            <div class="datos-header">
+                <h2><i class="fa-solid fa-location-dot"></i> Contacto y Domicilio</h2>
+                <button class="boton-editar" onclick="abrirModal()">
+                    <i class="fa-solid fa-pen-to-square"></i> Editar Datos
+                </button>
+            </div>
+            <div class="datos-cuerpo">
+                <div class="datos-grupo">
+                    <label>Correo Electrónico</label>
+                    <p id="txtEmail">juan.perez@email.com</p>
+                </div>
+                <div class="datos-grupo">
+                    <label>Teléfono Móvil</label>
+                    <p id="txtTel">+54 9 11 4920-1122</p>
+                </div>
+                <div class="datos-grupo">
+                    <label>Domicilio</label>
+                    <p id="txtDireccion">Av. Corrientes 2450, Piso 4, Depto B</p>
+                </div>
+                <div class="datos-grupo">
+                    <label>Localidad</label>
+                    <p>CABA, Buenos Aires</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="datos-contenedor">
+            <div class="datos-header">
+                <h2><i class="fa-solid fa-shield-halved"></i> Cobertura y Emergencias</h2>
+            </div>
+            <div class="datos-cuerpo">
+                <div class="datos-grupo">
+                    <label>Obra Social / Prepaga</label>
+                    <p>OSDE Binario</p>
+                </div>
+                <div class="datos-grupo">
+                    <label>Plan Médicos</label>
+                    <p>Plan 310 (Global)</p>
+                </div>
+                <div class="datos-grupo">
+                    <label>Contacto de Emergencia</label>
+                    <p id="txtEmergenciaNombre">Maria Laura Pérez (Esposa)</p>
+                </div>
+                <div class="datos-grupo">
+                    <label>Teléfono de Emergencia</label>
+                    <p id="txtEmergenciaTel" style="color: #e53935; font-weight: bold;">+54 9 11 5821-9900</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal" id="modalEdicion">
+        <div class="modal-contenido">
+            <h3>Editar Datos de Contacto</h3>
+            <form id="formularioDatos" onsubmit="guardarDatos(event)">
+                <div class="campo-input">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="inputEmail" required>
+                </div>
+                <div class="campo-input">
+                    <label>Teléfono Móvil</label>
+                    <input type="text" id="inputTel" required>
+                </div>
+                <div class="campo-input">
+                    <label>Domicilio</label>
+                    <input type="text" id="inputDireccion" required>
+                </div>
+                <div class="modal-acciones">
+                    <button type="button" class="boton-cancelar" onclick="cerrarModal()">Cancelar</button>
+                    <button type="submit" class="boton-editar">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>

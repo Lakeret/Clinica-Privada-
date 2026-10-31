@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="icon" type="image/png" href="/Pagina Pacientes/recursos/Logo Clinica Privada.png">
+    <link rel="stylesheet" href="/Pagina Pacientes/css/mis-datos-pacientes.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c7d469fc45.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="contenedor-principal">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="/Pagina Pacientes/recursos/Logo Clinica Privada.png" alt="logo" />
+                <div class="texto-logo-sidebar">
+                    <h2>Clinica Privada</h2>
+                    <p>Cuidandote Siempre</p>
+                </div>
+            </div>
+
+            <p class="sidebar-seccion">Menu de Paciente</p>
+            <ul class="sidebar-opciones">
+                <li><a href="Inicio.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a class="activo" href="/Pagina Pacientes/paginas/mis-datos-pacientes.html"><i
+                            class="fa-solid fa-user"></i> Mis Datos</a></li>
+                <li><a href="Turnos_Salas.html"><i class="fa-solid fa-calendar-days"></i> Mis Turnos</a></li>
+                <li><a href="Historias.html"><i class="fa-solid fa-book-medical"></i> Mis Recetas y Estudios</a></li>
+            </ul>
+
+            <hr class="linea-divisor">
+
+            <div class="sidebar-usuario">
+                <img src="Recursos/avatar.png" alt="Avatar" class="avatar-doc">
+                <div>
+                    <strong>Nombre Paciente</strong>
+                    <p>99.999.999</p>
+                </div>
+            </div>
+        </aside>
+
+        <div class="contenido-derecha">
+            <header class="header-superior">
+                <div class="buscador">
+                    <input type="text" placeholder="Buscar Datos">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div class="cerrar">
+                    <a href="/Pagina Pacientes/index.html">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                    </a>
+                </div>
+            </header>
+
+            <main>
+                <section class="bienvenida-seccion">
+                    <h1>Tus Datos/Informcaion</h1>
+                    <div class="fecha-badge">Martes 1 de Septiembre</div>
+                </section>
+
+                <section class="datos-contenedor">
+                    <div class="datos-header">
+                        <h2><i class="fa-solid fa-id-card"></i> Información Personal</h2>
+                    </div>
+                    <div class="datos-cuerpo">
+                        <div class="datos-grupo">
+                            <label>Nombre Completo</label>
+                            <p>Pepe Perez</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Fecha de Nacimiento</label>
+                            <p>14 / 05 / 2000</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Documento</label>
+                            <p>DNI 38.450.912</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Nacionalidad</label>
+                            <p>Argentina</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Grupo Sanguíneo</label>
+                            <p>O Positivo (O+)</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Genero</label>
+                            <p>Masculino</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="datos-contenedor">
+                    <div class="datos-header">
+                        <h2><i class="fa-solid fa-location-dot"></i> Contacto y Domicilio</h2>
+                        <button class="boton-editar" onclick="abrirModal()">
+                            <i class="fa-solid fa-pen-to-square"></i> Editar Datos
+                        </button>
+                    </div>
+                    <div class="datos-cuerpo">
+                        <div class="datos-grupo">
+                            <label>Correo Electrónico</label>
+                            <p id="txtEmail">nombre.email@email.com</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Teléfono Móvil</label>
+                            <p id="txtTel">+54 9 11 4920-1122</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Domicilio</label>
+                            <p id="txtDireccion">Av. Corrientes 2450</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Localidad</label>
+                            <p>CABA, Buenos Aires</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="datos-contenedor">
+                    <div class="datos-header">
+                        <h2><i class="fa-solid fa-shield-halved"></i> Cobertura y Emergencias</h2>
+                    </div>
+                    <div class="datos-cuerpo">
+                        <div class="datos-grupo">
+                            <label>Obra Social / Prepaga</label>
+                            <p>OSDE Binario</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Plan Médicos</label>
+                            <p>Plan 310</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Contacto de Emergencia</label>
+                            <p id="txtEmergenciaNombre">Maria Laura</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Teléfono de Emergencia</label>
+                            <p id="txtEmergenciaTel" style="color: #e53935; font-weight: bold;">+54 9 11 5821-9900</p>
+                        </div>
+                    </div>
+                </section>
+
+
+            </main>
+            <div class="modal" id="modalEdicion">
+                <div class="modal-contenido">
+                    <h3>Editar Datos de Contacto</h3>
+                    <form id="formularioDatos" onsubmit="guardarDatos(event)">
+                        <div class="campo-input">
+                            <label>Correo Electrónico</label>
+                            <input type="email" id="inputEmail" required>
+                        </div>
+                        <div class="campo-input">
+                            <label>Teléfono Móvil</label>
+                            <input type="text" id="inputTel" required>
+                        </div>
+                        <div class="campo-input">
+                            <label>Domicilio</label>
+                            <input type="text" id="inputDireccion" required>
+                        </div>
+                        <div class="modal-acciones">
+                            <button type="button" class="boton-cancelar" onclick="cerrarModal()">Cancelar</button>
+                            <button type="submit" class="boton-editar">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/Pagina Pacientes/js/mis-datos.js"></script>
+</body>
+
+</html>
