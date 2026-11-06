@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis turnos - Clínica Privada</title>
+    <link rel="icon" href="../recursos/Logo Clinica Privada.png">
+    <link rel="stylesheet" href="../css/mis-turnos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c7d469fc45.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="contenedor-principal">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="../recursos/Logo Clinica Privada.png" alt="Logo de Clínica Privada">
+                <div class="texto-logo-sidebar">
+                    <h2>Clínica Privada</h2>
+                    <p>Cuidándote siempre</p>
+                </div>
+            </div>
+            <p class="sidebar-seccion">Menú de paciente</p>
+            <ul class="sidebar-opciones">
+                <li><a href="inicio-paciente.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="mis-datos-pacientes.html"><i class="fa-solid fa-user"></i> Mis datos</a></li>
+                <li><a class="activo" href="mis-turnos.html"><i class="fa-solid fa-calendar-days"></i> Mis turnos</a>
+                </li>
+                <li><a href="mis-recetas-estudios.html"><i class="fa-solid fa-book-medical"></i> Mis recetas y
+                        estudios</a></li>
+            </ul>
+            <div class="sidebar-usuario">
+                <img src="../recursos/avatar.png" alt="" class="avatar-doc">
+                <div><strong id="nombrePaciente">Nombre del paciente</strong>
+                    <p id="dniPaciente">DNI: --</p>
+                </div>
+            </div>
+        </aside>
+
+        <div class="contenido-derecha">
+            <header class="header-superior">
+                <span>Portal del paciente</span>
+                <a class="salir" href="../index.html" aria-label="Cerrar sesión"><i
+                        class="fa-solid fa-right-from-bracket"></i></a>
+            </header>
+            <main>
+                <section class="bienvenida-seccion">
+                    <div>
+                        <h1>Mis turnos</h1>
+                        <p>Consulta tus proximos turnos medicos.</p>
+                    </div>
+                    <a class="boton" href="../index.html#contacto" target="_blank">Solicitar informaciopn</a>
+                </section>
+
+                <section class="panel">
+                    <h2><i class="fa-solid fa-calendar-check"></i> Proximos turnos</h2>
+                    <div class="tabla-contenedor">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Especialidad</th>
+                                    <th>Profesional</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listaTurnos">
+                                <tr>
+                                    <td colspan="5">Cargando turnos...</td>
+                                </tr>
+                            </tbody>
+                            <p id="mensaje-turnos" role="status"></p>
+                        </table>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="../js/mis-turnos.js"></script>
+</body>
+
+</html>

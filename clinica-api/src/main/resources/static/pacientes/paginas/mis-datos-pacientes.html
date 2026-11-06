@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinica Privada</title>
+    <link rel="icon" type="image/png" href="../recursos/Logo Clinica Privada.png">
+    <link rel="stylesheet" href="../css/mis-datos-pacientes.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c7d469fc45.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="contenedor-principal">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="../recursos/Logo Clinica Privada.png" alt="logo" />
+                <div class="texto-logo-sidebar">
+                    <h2>Clinica Privada</h2>
+                    <p>Cuidandote Siempre</p>
+                </div>
+            </div>
+
+            <p class="sidebar-seccion">Menu de Paciente</p>
+            <ul class="sidebar-opciones">
+                <li><a href="./inicio-paciente.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a class="activo" href="../paginas/mis-datos-pacientes.html"><i class="fa-solid fa-user"></i> Mis
+                        Datos</a></li>
+                <li><a href="./mis-turnos.html"><i class="fa-solid fa-calendar-days"></i> Mis Turnos</a></li>
+                <li><a href="./mis-recetas-estudios.html"><i class="fa-solid fa-book-medical"></i> Mis Recetas y
+                        Estudios</a></li>
+            </ul>
+
+            <hr class="linea-divisor">
+
+            <div class="sidebar-usuario">
+                <img src="../recursos/avatar.png" alt="" class="avatar-doc">
+                <div>
+                    <strong id="nombrePaciente"></strong>
+                    <p id="dniPaciente"></p>
+                </div>
+            </div>
+        </aside>
+
+        <div class="contenido-derecha">
+            <header class="header-superior">
+                <span>Portal del paciente</span>
+                <a class="salir" href="../index.html" aria-label="Cerrar sesión"><i
+                        class="fa-solid fa-right-from-bracket"></i></a>
+            </header>
+
+            <main>
+                <section class="bienvenida-seccion">
+                    <h1>Tus Datos/Informcaion</h1>
+                    <div class="fecha-badge">fecha</div>
+                </section>
+
+                <section class="datos-contenedor">
+                    <div class="datos-header">
+                        <h2><i class="fa-solid fa-id-card"></i> Información Personal</h2>
+                    </div>
+                    <div class="datos-cuerpo">
+                        <div class="datos-grupo">
+                            <label>Nombre Completo</label>
+                            <p id="datoNombreCompleto">Cargando...</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Fecha de Nacimiento</label>
+                            <p id="datoFechaNacimiento">Cargando...</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Documento</label>
+                            <p id="datoDni">Cargando...</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Nacionalidad</label>
+                            <p id="datoNacionalidad">Cargando...</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Grupo Sanguíneo</label>
+                            <p>No registro</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Genero</label>
+                            <p id="datoSexo">Cargando...</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="datos-contenedor">
+                    <div class="datos-header">
+                        <h2><i class="fa-solid fa-location-dot"></i> Contacto y Domicilio</h2>
+                        <button class="boton-editar" onclick="abrirModal()">
+                            <i class="fa-solid fa-pen-to-square"></i> Editar Datos
+                        </button>
+                    </div>
+                    <div class="datos-cuerpo">
+                        <div class="datos-grupo">
+                            <label>Correo Electrónico</label>
+                            <p id="txtEmail">No registro</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Teléfono Móvil</label>
+                            <p id="txtTel">No registro</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Domicilio</label>
+                            <p id="txtDireccion">No registro</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Provincia</label>
+                            <p id="datoProvincia">No registro</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="datos-contenedor">
+                    <div class="datos-header">
+                        <h2><i class="fa-solid fa-shield-halved"></i> Cobertura y Emergencias</h2>
+                    </div>
+                    <div class="datos-cuerpo">
+                        <div class="datos-grupo">
+                            <label>Obra Social / Prepaga</label>
+                            <p id="txtObraSocial">Cargando...</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Plan Médicos</label>
+                            <p id="txtPlan">No registro</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Contacto de Emergencia</label>
+                            <p id="txtEmergenciaNombre">No registro</p>
+                        </div>
+                        <div class="datos-grupo">
+                            <label>Teléfono de Emergencia</label>
+                            <p id="txtEmergenciaTel" style="color: #e53935; font-weight: bold;">No registro</p>
+                        </div>
+                    </div>
+                </section>
+
+                <p id="mensaje-datos" role="status"></p>
+
+
+            </main>
+            <div class="modal" id="modalEdicion">
+                <div class="modal-contenido">
+                    <h3>Editar Datos de Contacto</h3>
+                    <form id="formularioDatos" onsubmit="guardarDatos(event)">
+                        <div class="campo-input">
+                            <label>Correo Electrónico</label>
+                            <input type="email" id="inputEmail" required>
+                        </div>
+                        <div class="campo-input">
+                            <label>Teléfono Móvil</label>
+                            <input type="text" id="inputTel" required>
+                        </div>
+                        <div class="campo-input">
+                            <label>Domicilio</label>
+                            <input type="text" id="inputDireccion" required>
+                        </div>
+                        <div class="campo-input">
+                            <label for="inputProvincia">Provincia</label>
+                            <select id="inputProvincia" required>
+                                <option value="">Seleccioná tu provincia</option>
+                                <option value="">Seleccione la provincia donde vive</option>
+                                <option value="caba">Ciudad Autónoma de Buenos Aires</option>
+                                <option value="buenos-aires">Buenos Aires</option>
+                                <option value="catamarca">Catamarca</option>
+                                <option value="chaco">Chaco</option>
+                                <option value="chubut">Chubut</option>
+                                <option value="cordoba">Córdoba</option>
+                                <option value="corrientes">Corrientes</option>
+                                <option value="entre-rios">Entre Ríos</option>
+                                <option value="formosa">Formosa</option>
+                                <option value="jujuy">Jujuy</option>
+                                <option value="la-pampa">La Pampa</option>
+                                <option value="la-rioja">La Rioja</option>
+                                <option value="mendoza">Mendoza</option>
+                                <option value="misiones">Misiones</option>
+                                <option value="neuquen">Neuquén</option>
+                                <option value="rio-negro">Río Negro</option>
+                                <option value="salta">Salta</option>
+                                <option value="san-juan">San Juan</option>
+                                <option value="san-luis">San Luis</option>
+                                <option value="santa-cruz">Santa Cruz</option>
+                                <option value="santa-fe">Santa Fe</option>
+                                <option value="santiago-del-estero">Santiago del Estero</option>
+                                <option value="tierra-del-fuego">Tierra del Fuego</option>
+                                <option value="tucuman">Tucumán</option>
+                            </select>
+                        </div>
+                        <div class="modal-acciones">
+                            <button type="button" class="boton-cancelar" onclick="cerrarModal()">Cancelar</button>
+                            <button type="submit" class="boton-editar">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/mis-datos.js"></script>
+</body>
+
+</html>
