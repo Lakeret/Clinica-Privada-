@@ -12,8 +12,10 @@ C:\Users\lucas\OneDrive\Escritorio\clinica-api\src\main\java\com\clinica\api\pac
 C:\Users\lucas\OneDrive\Escritorio\clinica-api\src\main\java\com\clinica\api\paciente\repository\PacienteRepository.java
 C:\Users\lucas\OneDrive\Escritorio\clinica-api\src\main\java\com\clinica\api\paciente\service\PacienteService.java
 C:\Users\lucas\OneDrive\Escritorio\clinica-api\src\main\java\com\clinica\api\turno\controller\TurnoController.java
+C:\Users\lucas\OneDrive\Escritorio\clinica-api\src\main\java\com\clinica\api\turno\dto\TurnoRequest.java
 C:\Users\lucas\OneDrive\Escritorio\clinica-api\src\main\java\com\clinica\api\turno\dto\TurnoResponseDTO.java
 C:\Users\lucas\OneDrive\Escritorio\clinica-api\src\main\java\com\clinica\api\turno\entity\Turno.java
 C:\Users\lucas\OneDrive\Escritorio\clinica-api\src\main\java\com\clinica\api\turno\repository\TurnoRepository.java
+C:\Users\lucas\OneDrive\Escritorio\clinica-api\src\main\java\com\clinica\api\turno\service\TurnoService.java
 C:\Users\lucas\OneDrive\Escritorio\clinica-api\src\main\java\com\clinica\api\usuario\entity\Usuario.java
 C:\Users\lucas\OneDrive\Escritorio\clinica-api\src\main\java\com\clinica\api\usuario\repository\UsuarioRepository.java
