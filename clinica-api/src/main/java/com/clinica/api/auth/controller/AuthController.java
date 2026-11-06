@@ -3,6 +3,7 @@ package com.clinica.api.auth.controller;
 import com.clinica.api.auth.dto.LoginRequest;
 import com.clinica.api.auth.dto.PacienteResponseDTO;
 import com.clinica.api.auth.dto.RegistroRequest;
+import com.clinica.api.auth.dto.ActualizarContactoRequest;
 import com.clinica.api.auth.service.AuthService;
 import com.clinica.api.paciente.entity.Paciente;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,10 +12,6 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.clinica.api.auth.dto.ActualizarContactoRequest;
-import jakarta.validation.Valid;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -104,5 +101,20 @@ public class AuthController {
         Paciente paciente = authService.actualizarContacto(idPaciente, datos);
 
         return ResponseEntity.ok(convertirRespuesta(paciente));
+    }
+
+    @DeleteMapping("/me")
+    public ResponseEntity<Void> eliminarCuenta(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+
+        if (session == null || session.getAttribute("idPaciente") == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        Integer idPaciente = (Integer) session.getAttribute("idPaciente");
+        authService.eliminarCuenta(idPaciente);
+        session.invalidate();
+
+        return ResponseEntity.noContent().build();
     }
 }

@@ -100,6 +100,10 @@ public class Paciente {
         this.idObraSocial = idObraSocial;
     }
 
+    public void setIdPaciente(Integer idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+
     public void setDni(String dni) {
         this.dni = dni;
     }

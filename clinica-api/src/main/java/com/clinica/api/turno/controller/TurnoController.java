@@ -1,9 +1,11 @@
 package com.clinica.api.turno.controller;
 
+import com.clinica.api.turno.dto.TurnoRequest;
 import com.clinica.api.turno.dto.TurnoResponseDTO;
-import com.clinica.api.turno.repository.TurnoRepository;
+import com.clinica.api.turno.service.TurnoService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +16,10 @@ import java.util.List;
 @RequestMapping("/api/turnos")
 public class TurnoController {
 
-    private final TurnoRepository turnoRepository;
+    private final TurnoService turnoService;
 
-    public TurnoController(TurnoRepository turnoRepository) {
-        this.turnoRepository = turnoRepository;
+    public TurnoController(TurnoService turnoService) {
+        this.turnoService = turnoService;
     }
 
     @GetMapping("/mis-turnos")
@@ -31,19 +33,23 @@ public class TurnoController {
         }
 
         Integer idPaciente = (Integer) session.getAttribute("idPaciente");
+        return ResponseEntity.ok(turnoService.listarPorPaciente(idPaciente));
+    }
 
-        List<TurnoResponseDTO> turnos = turnoRepository
-                .findByIdPacienteOrderByFechaAscHoraAsc(idPaciente)
-                .stream()
-                .map(turno -> new TurnoResponseDTO(
-                        turno.getFecha(),
-                        turno.getHora().toString(),
-                        "Pendiente de vincular",
-                        "Pendiente de vincular",
-                        turno.getEstado()
-                ))
-                .toList();
+    @PostMapping
+    public ResponseEntity<String> crearTurno(
+            @Valid @RequestBody TurnoRequest datos,
+            HttpServletRequest request
+    ) {
+        HttpSession session = request.getSession(false);
 
-        return ResponseEntity.ok(turnos);
+        if (session == null || session.getAttribute("idPaciente") == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        Integer idPaciente = (Integer) session.getAttribute("idPaciente");
+        String mensaje = turnoService.crearTurno(idPaciente, datos);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
     }
 }

@@ -200,3 +200,39 @@ async function guardarDatos(event) {
         boton.disabled = false;
     }
 }
+
+document.getElementById("botonEliminarCuenta")?.addEventListener("click", async () => {
+    const confirmar = window.confirm(
+        "Se eliminarán de forma permanente tu cuenta, tus datos y tus registros médicos. ¿Querés continuar?"
+    );
+
+    if (!confirmar) return;
+
+    const boton = document.getElementById("botonEliminarCuenta");
+    const mensaje = document.getElementById("mensaje-eliminar-cuenta");
+    boton.disabled = true;
+    mensaje.textContent = "Eliminando la cuenta...";
+
+    try {
+        const respuesta = await fetch("/api/auth/me", {
+            method: "DELETE",
+            credentials: "same-origin"
+        });
+
+        if (respuesta.status === 401) {
+            window.location.href = "LogIn-Pacientes.html";
+            return;
+        }
+
+        const resultado = await respuesta.json().catch(() => ({}));
+
+        if (!respuesta.ok) {
+            throw new Error(resultado.detail || "No se pudo eliminar la cuenta.");
+        }
+
+        window.location.href = "crear-cuenta.html";
+    } catch (error) {
+        mensaje.textContent = error.message;
+        boton.disabled = false;
+    }
+});

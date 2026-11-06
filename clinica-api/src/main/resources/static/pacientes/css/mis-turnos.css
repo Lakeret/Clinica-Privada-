@@ -234,3 +234,98 @@ th {
     color: #71818a;
     font-size: 12px;
 }
+.boton {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.boton-agregar-turno {
+    margin-left: auto;
+}
+
+.formulario-turno {
+    margin-bottom: 20px;
+}
+
+.formulario-campos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 16px;
+    padding: 22px;
+}
+
+.formulario-campos label {
+    display: block;
+    margin-bottom: 7px;
+    color: #263b47;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.formulario-campos input,
+.formulario-campos select {
+    width: 100%;
+    min-height: 44px;
+    padding: 9px 12px;
+    color: #263b47;
+    background: #f8fafb;
+    border: 1px solid #d5dfe4;
+    border-radius: 8px;
+    font: inherit;
+}
+
+.formulario-campos input:focus,
+.formulario-campos select:focus {
+    outline: none;
+    border-color: #1e5a7a;
+    box-shadow: 0 0 0 3px rgba(30, 90, 122, 0.12);
+}
+
+.ayuda-turno,
+#mensaje-crear-turno,
+.acciones-turno {
+    grid-column: 1 / -1;
+}
+
+.ayuda-turno {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+#mensaje-crear-turno {
+    color: #123b52;
+    font-size: 13px;
+}
+
+.acciones-turno {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.boton-secundario {
+    padding: 11px 16px;
+    color: #374151;
+    background: #e5e7eb;
+    border: none;
+    border-radius: 8px;
+    font: inherit;
+    cursor: pointer;
+}
+
+.formulario-campos button:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+@media (max-width: 700px) {
+    .bienvenida-seccion {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .boton-agregar-turno {
+        margin-left: 0;
+    }
+}

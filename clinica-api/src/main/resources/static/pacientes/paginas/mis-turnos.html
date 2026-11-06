@@ -33,7 +33,7 @@
                         estudios</a></li>
             </ul>
             <div class="sidebar-usuario">
-                <img src="../recursos/avatar.png" alt="" class="avatar-doc">
+                <i class="fa-solid fa-circle-user"></i>
                 <div><strong id="nombrePaciente">Nombre del paciente</strong>
                     <p id="dniPaciente">DNI: --</p>
                 </div>
@@ -52,9 +52,43 @@
                         <h1>Mis turnos</h1>
                         <p>Consulta tus proximos turnos medicos.</p>
                     </div>
-                    <a class="boton" href="../index.html#contacto" target="_blank">Solicitar informaciopn</a>
+                    <button type="button" class="boton boton-agregar-turno" id="abrirFormularioTurno">
+    <i class="fa-solid fa-plus"></i> Agregar turno
+</button>
+<a class="boton" href="../index.html#contacto" target="_blank">Solicitar información</a>
                 </section>
 
+                <section class="panel formulario-turno" id="panelNuevoTurno" hidden>
+                    <h2><i class="fa-solid fa-calendar-plus"></i> Solicitar un turno</h2>
+                    <form id="formularioNuevoTurno" class="formulario-campos">
+                        <div>
+                            <label for="fechaTurno">Fecha</label>
+                            <input id="fechaTurno" type="date" required>
+                        </div>
+                        <div>
+                            <label for="horaTurno">Hora</label>
+                            <input id="horaTurno" type="time" step="1800" required>
+                        </div>
+                        <div>
+                            <label for="especialidadTurno">Especialidad</label>
+                            <select id="especialidadTurno" required>
+                                <option value="">Seleccioná una especialidad</option>
+                                <option value="Cardiología">Cardiología</option>
+                                <option value="Oftalmología">Oftalmología</option>
+                                <option value="Traumatología">Traumatología</option>
+                                <option value="Diagnóstico por Imágenes">Diagnóstico por Imágenes</option>
+                                <option value="Flebología">Flebología</option>
+                                <option value="Endocrinología">Endocrinología</option>
+                            </select>
+                        </div>
+                        <p class="ayuda-turno">El profesional se asignará automáticamente según la especialidad.</p>
+                        <p id="mensaje-crear-turno" role="status"></p>
+                        <div class="acciones-turno">
+                            <button type="button" class="boton-secundario" id="cancelarFormularioTurno">Cancelar</button>
+                            <button type="submit" class="boton">Confirmar turno</button>
+                        </div>
+                    </form>
+                </section>
                 <section class="panel">
                     <h2><i class="fa-solid fa-calendar-check"></i> Proximos turnos</h2>
                     <div class="tabla-contenedor">
@@ -73,13 +107,14 @@
                                     <td colspan="5">Cargando turnos...</td>
                                 </tr>
                             </tbody>
-                            <p id="mensaje-turnos" role="status"></p>
                         </table>
+                        <p id="mensaje-turnos" role="status"></p>
                     </div>
                 </section>
             </main>
         </div>
     </div>
+    <script src="../js/paciente-sidebar.js"></script>
     <script src="../js/mis-turnos.js"></script>
 </body>
 

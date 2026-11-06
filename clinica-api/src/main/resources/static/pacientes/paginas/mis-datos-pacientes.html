@@ -34,10 +34,8 @@
                         Estudios</a></li>
             </ul>
 
-            <hr class="linea-divisor">
-
             <div class="sidebar-usuario">
-                <img src="../recursos/avatar.png" alt="" class="avatar-doc">
+                <i class="fa-solid fa-circle-user"></i>
                 <div>
                     <strong id="nombrePaciente"></strong>
                     <p id="dniPaciente"></p>
@@ -138,6 +136,22 @@
                             <label>Teléfono de Emergencia</label>
                             <p id="txtEmergenciaTel" style="color: #e53935; font-weight: bold;">No registro</p>
                         </div>
+                    </div>
+                </section>
+
+                <section class="datos-contenedor eliminar-cuenta">
+                    <div class="datos-header">
+                        <h2><i class="fa-solid fa-triangle-exclamation"></i> Eliminar cuenta</h2>
+                    </div>
+                    <div class="datos-cuerpo">
+                        <p class="texto-eliminar-cuenta">
+                            Se eliminarán tu cuenta, tus datos personales y los registros médicos asociados.
+                            Después podrás registrarte nuevamente desde Crear cuenta.
+                        </p>
+                        <button type="button" id="botonEliminarCuenta" class="boton-eliminar-cuenta">
+                            Eliminar cuenta
+                        </button>
+                        <p id="mensaje-eliminar-cuenta" role="status"></p>
                     </div>
                 </section>
 

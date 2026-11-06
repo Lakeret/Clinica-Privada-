@@ -8,10 +8,14 @@ import com.clinica.api.paciente.repository.PacienteRepository;
 import com.clinica.api.usuario.entity.Usuario;
 import com.clinica.api.usuario.repository.UsuarioRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.Map;
 
 @Service
 public class AuthService {
@@ -19,14 +23,17 @@ public class AuthService {
         private final PacienteRepository pacienteRepository;
         private final UsuarioRepository usuarioRepository;
         private final PasswordEncoder passwordEncoder;
+        private final JdbcTemplate jdbcTemplate;
 
         public AuthService(
                         PacienteRepository pacienteRepository,
                         UsuarioRepository usuarioRepository,
-                        PasswordEncoder passwordEncoder) {
+                        PasswordEncoder passwordEncoder,
+                        JdbcTemplate jdbcTemplate) {
                 this.pacienteRepository = pacienteRepository;
                 this.usuarioRepository = usuarioRepository;
                 this.passwordEncoder = passwordEncoder;
+                this.jdbcTemplate = jdbcTemplate;
         }
 
         @Transactional
@@ -45,20 +52,22 @@ public class AuthService {
                                         "Ya existe un paciente con ese DNI");
                 }
 
-                Paciente paciente = new Paciente();
-                paciente.setDni(dni);
-                paciente.setNombre(datos.nombre().trim());
-                paciente.setApellido(datos.apellido().trim());
-                paciente.setFechaNacimiento(datos.fechaNacimiento());
-                paciente.setTelefono(datos.telefono().trim());
-                paciente.setEmail(datos.email().trim());
-                paciente.setSexo(datos.sexo());
-                paciente.setDireccion(datos.direccion().trim());
-                paciente.setNacionalidad(datos.nacionalidad());
-                paciente.setIdObraSocial(datos.idObraSocial());
-                paciente.setProvincia(datos.provincia());
+                Integer idPaciente = jdbcTemplate.queryForObject(
+                                "CALL AgregarPaciente(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                                (resultado, fila) -> resultado.getInt("id_paciente"),
+                                datos.idObraSocial(),
+                                dni,
+                                datos.nombre().trim(),
+                                datos.apellido().trim(),
+                                datos.fechaNacimiento(),
+                                datos.sexo(),
+                                datos.telefono().trim(),
+                                datos.email().trim(),
+                                datos.direccion(),
+                                datos.nacionalidad(),
+                                datos.provincia());
 
-                Paciente pacienteGuardado = pacienteRepository.save(paciente);
+                Paciente pacienteGuardado = buscarPorId(idPaciente);
 
                 Usuario usuario = new Usuario();
                 usuario.setPaciente(pacienteGuardado);
@@ -72,28 +81,65 @@ public class AuthService {
 
         @Transactional(readOnly = true)
         public Paciente iniciarSesion(String dni, String contrasena) {
-                Usuario usuario = usuarioRepository.findByPaciente_Dni(dni.trim())
-                                .orElseThrow(() -> new ResponseStatusException(
-                                                HttpStatus.UNAUTHORIZED,
-                                                "DNI o contraseña incorrectos"));
-
-                boolean contrasenaCorrecta = passwordEncoder.matches(contrasena, usuario.getContrasena());
-
-                if (!"ACTIVO".equals(usuario.getEstado()) || !contrasenaCorrecta) {
+                Map<String, Object> credenciales;
+                try {
+                        credenciales = jdbcTemplate.queryForMap(
+                                        "CALL BuscarCredencialesPaciente(?)",
+                                        dni.trim());
+                } catch (EmptyResultDataAccessException error) {
                         throw new ResponseStatusException(
                                         HttpStatus.UNAUTHORIZED,
                                         "DNI o contraseña incorrectos");
                 }
 
-                return usuario.getPaciente();
+                String contrasenaGuardada = (String) credenciales.get("contrasena");
+                String estado = (String) credenciales.get("estado");
+                Integer idPaciente = ((Number) credenciales.get("id_paciente")).intValue();
+
+                boolean contrasenaCorrecta = passwordEncoder.matches(contrasena, contrasenaGuardada);
+
+                if (!"ACTIVO".equals(estado) || !contrasenaCorrecta) {
+                        throw new ResponseStatusException(
+                                        HttpStatus.UNAUTHORIZED,
+                                        "DNI o contraseña incorrectos");
+                }
+
+                return buscarPorId(idPaciente);
         }
 
         @Transactional(readOnly = true)
         public Paciente buscarPorId(Integer idPaciente) {
-                return pacienteRepository.findById(idPaciente)
-                                .orElseThrow(() -> new ResponseStatusException(
-                                                HttpStatus.NOT_FOUND,
-                                                "No se encontró el paciente"));
+                try {
+                        return jdbcTemplate.queryForObject(
+                                        "CALL ObtenerPacientePorId(?)",
+                                        (resultado, fila) -> {
+                                                Paciente paciente = new Paciente();
+                                                paciente.setIdPaciente(resultado.getInt("id_paciente"));
+                                                paciente.setDni(resultado.getString("dni"));
+                                                paciente.setNombre(resultado.getString("nombre"));
+                                                paciente.setApellido(resultado.getString("apellido"));
+                                                paciente.setFechaNacimiento(resultado.getDate("fecha_nacimiento") == null
+                                                                ? null
+                                                                : resultado.getDate("fecha_nacimiento").toLocalDate());
+                                                paciente.setSexo(resultado.getString("sexo"));
+                                                paciente.setTelefono(resultado.getString("telefono"));
+                                                paciente.setEmail(resultado.getString("email"));
+                                                paciente.setDireccion(resultado.getString("direccion"));
+                                                paciente.setNacionalidad(resultado.getString("nacionalidad"));
+                                                paciente.setProvincia(resultado.getString("provincia"));
+
+                                                Object idObraSocial = resultado.getObject("id_obra_social");
+                                                paciente.setIdObraSocial(idObraSocial == null
+                                                                ? null
+                                                                : ((Number) idObraSocial).intValue());
+                                                return paciente;
+                                        },
+                                        idPaciente);
+                } catch (EmptyResultDataAccessException error) {
+                        throw new ResponseStatusException(
+                                        HttpStatus.NOT_FOUND,
+                                        "No se encontró el paciente");
+                }
         }
 
         @Transactional
@@ -106,5 +152,13 @@ public class AuthService {
                 paciente.setProvincia(datos.provincia());
 
                 return pacienteRepository.save(paciente);
+        }
+
+        @Transactional
+        public void eliminarCuenta(Integer idPaciente) {
+                jdbcTemplate.queryForObject(
+                                "CALL EliminarCuentaPaciente(?)",
+                                (resultado, fila) -> resultado.getString("resultado"),
+                                idPaciente);
         }
 }
