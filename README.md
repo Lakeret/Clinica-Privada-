@@ -13,8 +13,6 @@ Proyecto integrador Clinica Privada sitio para pacientes hecho en HTML, CSS y Ja
 
 No hace falta instalar Maven por separado: el proyecto incluye Maven Wrapper.
 
-> El repositorio no incluye un archivo SQL para crear la base de datos desde cero. Si todavía no tenés la base `sistema_clinico` y sus procedimientos, necesitás conseguir el script de la materia/equipo e importarlo en MySQL antes de usar las funciones que consultan datos.
-
 ## Clonar desde la terminal
 
 Abrí PowerShell, la terminal de Visual Studio Code o Git Bash y ejecutá:
