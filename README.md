@@ -21,14 +21,6 @@ Abrí PowerShell, la terminal de Visual Studio Code o Git Bash y ejecutá:
 git clone -b FrontEnd https://github.com/Lakeret/Clinica-Privada-.git
 ```
 
-En Visual Studio Code podés abrir la carpeta descargada con:
-
-```bash
-code .
-```
-
-Si `code .` no está disponible, abrí Visual Studio Code y elegí **Archivo > Abrir carpeta**. Seleccioná la carpeta `Clinica-Privada-` que se creó al clonar.
-
 ## Preparar la base de datos
 
 1. Iniciá MySQL.
@@ -41,8 +33,8 @@ Si `code .` no está disponible, abrí Visual Studio Code y elegí **Archivo > A
 
 Instalá estas extensiones desde la sección **Extensiones** de VS Code:
 
-- **Extension Pack for Java**: incluye las herramientas de Java, Maven, ejecución y depuración.
-- **Spring Boot Extension Pack**: agrega herramientas para abrir y ejecutar aplicaciones Spring Boot.
+- **Extension Pack for Java**
+- **Spring Boot Extension Pack**
 
 ### Iniciar el proyecto
 
@@ -55,9 +47,7 @@ cd backend
 .\mvnw.cmd spring-boot:run
 ```
 
-La primera vez Maven puede tardar porque descarga los componentes necesarios. Cuando aparezca el mensaje de que la aplicación inició, abrí en el navegador:
-
-```text
+```buscar en el navegador:
 http://localhost:8080/
 ```
 
@@ -67,15 +57,15 @@ Para detener la aplicación, volvé a la terminal y presioná `Ctrl+C`.
 
 ## Ejecutar en Spring Tools Suite (STS)
 
-1. Instalá [Spring Tools para Eclipse](https://spring.io/tools/) y abrilo.
+1. Abrir Spring Tools
 2. Elegí **File > Import > Maven > Existing Maven Projects**.
 3. En **Root Directory**, seleccioná la carpeta `backend` de `Clinica-Privada-`.
-4. Seleccioná el proyecto que aparece y presioná **Finish**. Esperá a que Maven descargue las dependencias.
+4. Seleccioná el proyecto que aparece y presioná **Finish**.
 5. Abrí `src/main/java/com/clinica/api/ClinicaApiApplication.java`.
 6. Presioná el botón de ejecutar o hacé clic derecho en el archivo y elegí **Run As > Spring Boot App**.
 7. Abrí `http://localhost:8080/` en el navegador.
 
-Si no aparece la opción de Spring Boot, comprobá que importaste la carpeta `backend` que contiene `pom.xml` y que STS está usando JDK 21. También podés iniciar el proyecto desde la terminal integrada con `mvnw.cmd spring-boot:run`, como en la sección anterior.
+Si o si se necesita la version JDK 21. No versiones mas nuevas ni mas viejas, unicamente compatible con esa version.
 
 ## Estructura del proyecto
 
@@ -102,4 +92,4 @@ Clinica-Privada-
 - Java 21 y Spring Boot 4.1.2
 - Maven Wrapper 3.10.0
 - MySQL
-- HTML, CSS y JavaScript
+- HTML , CSS y JavaScript
