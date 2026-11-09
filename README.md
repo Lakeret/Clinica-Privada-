@@ -17,16 +17,8 @@ No hace falta instalar Maven por separado: el proyecto incluye Maven Wrapper.
 
 Abrí PowerShell, la terminal de Visual Studio Code o Git Bash y ejecutá:
 
-=======
-> El repositorio no incluye un archivo SQL para crear la base de datos desde cero. Si todavía no tenés la base `sistema_clinico` y sus procedimientos, necesitás conseguir el script de la materia/equipo e importarlo en MySQL antes de usar las funciones que consultan datos.
-
-## Clonar desde la terminal
-
-Abrí PowerShell, la terminal de Visual Studio Code o Git Bash y ejecutá:
-
 ```bash
 git clone -b FrontEnd https://github.com/Lakeret/Clinica-Privada-.git
-cd Clinica-Privada-
 ```
 
 En Visual Studio Code podés abrir la carpeta descargada con:
