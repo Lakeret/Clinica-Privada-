@@ -31,22 +31,18 @@ Si `code .` no está disponible, abrí Visual Studio Code y elegí **Archivo > A
 
 ## Preparar la base de datos
 
-1. Iniciá MySQL desde XAMPP o desde el programa que uses.
-2. Creá o importá la base `sistema_clinico` con las tablas y procedimientos que necesita la API.
+1. Iniciá MySQL.
+2. Creá o importá la base `sistema_clinico` con las tablas, store procedures y triggers que necesita la API.
 3. Revisá `backend/src/main/resources/application.properties` y configurá la dirección, el usuario y la contraseña de tu MySQL.
-
-No subas contraseñas reales a GitHub. El archivo `application.properties` contiene actualmente datos de conexión locales; reemplazá los valores privados antes de publicar el repositorio.
 
 ## Ejecutar en Visual Studio Code
 
 ### Extensiones
 
-Instalá estas extensiones desde la sección **Extensiones** de VS Code (`Ctrl+Shift+X`):
+Instalá estas extensiones desde la sección **Extensiones** de VS Code:
 
 - **Extension Pack for Java**: incluye las herramientas de Java, Maven, ejecución y depuración.
 - **Spring Boot Extension Pack**: agrega herramientas para abrir y ejecutar aplicaciones Spring Boot.
-
-Son suficientes para este proyecto. VS Code ya incluye soporte básico para editar HTML, CSS y JavaScript; no necesitás una extensión de servidor web para el frontend. [Documentación oficial de extensiones Java y Spring para VS Code](https://code.visualstudio.com/docs/java/extensions).
 
 ### Iniciar el proyecto
 
