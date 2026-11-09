@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 public record RegistroRequest(
         @NotBlank
-        @Pattern(regexp = "\\d{7,10}", message = "El DNI debe tener entre 7 y 10 números")
+        @Pattern(regexp = "\\d{7,8}", message = "El DNI debe tener entre 7 y 8 números")
         String dni,
 
         @NotBlank
