@@ -4,7 +4,7 @@ CREATE DATABASE IF NOT EXISTS sistema_clinico
 
 USE sistema_clinico;
 
--- TABLAS
+-- Tablas para base de dasto
 
 CREATE TABLE IF NOT EXISTS `auditoria_bd` (
   `id_auditoria` bigint unsigned NOT NULL AUTO_INCREMENT,
@@ -256,7 +256,7 @@ CREATE TABLE IF NOT EXISTS `receta` (
   CONSTRAINT `fk_receta_paciente` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- DATOS BÁSICOS DE CATÁLOGO PARA PROBAR LA API
+-- Inserto datos basicos de prueba
 
 INSERT IGNORE INTO rol (id_rol, nombre, descripcion) VALUES
     (1, 'Medico', 'Personal médico'),
