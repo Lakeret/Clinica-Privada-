@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis recetas y estudios - Clínica Privada</title>
+    <link rel="icon" href="../recursos/Logo Clinica Privada.png">
+    <link rel="stylesheet" href="../css/mis-recetas-estudios.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c7d469fc45.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="contenedor-principal">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="../recursos/Logo Clinica Privada.png" alt="Logo de Clínica Privada">
+                <div class="texto-logo-sidebar">
+                    <h2>Clínica Privada</h2>
+                    <p>Cuidándote siempre</p>
+                </div>
+            </div>
+            <p class="sidebar-seccion">Menú de paciente</p>
+            <ul class="sidebar-opciones">
+                <li><a href="inicio-paciente.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="mis-datos-pacientes.html"><i class="fa-solid fa-user"></i> Mis datos</a></li>
+                <li><a href="mis-turnos.html"><i class="fa-solid fa-calendar-days"></i> Mis turnos</a></li>
+                <li><a class="activo" href="mis-recetas-estudios.html"><i class="fa-solid fa-book-medical"></i> Mis
+                        recetas y estudios</a></li>
+            </ul>
+            <div class="sidebar-usuario">
+                <span><i class="fa-solid fa-circle-user"></i></span>
+                <div><strong id="nombrePaciente">Nombre del paciente</strong>
+                    <p id="dniPaciente">DNI: --</p>
+                </div>
+            </div>
+        </aside>
+
+        <div class="contenido-derecha">
+            <header class="header-superior">
+                <span>Portal del paciente</span>
+                <a class="salir" href="../index.html" aria-label="Cerrar sesión"><i
+                        class="fa-solid fa-right-from-bracket"></i></a>
+            </header>
+            <main>
+                <section class="bienvenida-seccion">
+                    <h1>Mis recetas y estudios</h1>
+                    <p>Consultá las indicaciones y estudios registrados.</p>
+                </section>
+
+                <section class="panel">
+                    <h2><i class="fa-solid fa-prescription"></i> Recetas</h2>
+                    <div class="lista" id="listaRecetas">
+                        <article class="elemento">
+                            <div class="elemento-icono"><i class="fa-solid fa-pills"></i></div>
+                            <div class="elemento-texto">
+                                <h3>Receta de ejemplo</h3>
+                                <p>Emitida: 10/11/2026 · Profesional: Dra. Ejemplo</p>
+                            </div>
+                            <span class="etiqueta">Disponible</span>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="panel">
+                    <h2><i class="fa-solid fa-flask"></i> Estudios</h2>
+                    <div class="lista" id="listaEstudios">
+                        <article class="elemento">
+                            <div class="elemento-icono"><i class="fa-solid fa-file-lines"></i></div>
+                            <div class="elemento-texto">
+                                <h3>Estudio de ejemplo</h3>
+                                <p>Fecha: 08/11/2026 · Estado: Resultado disponible</p>
+                            </div>
+                            <span class="etiqueta">Disponible</span>
+                        </article>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="../js/paciente-sidebar.js"></script>
+</body>
+
+</html>
