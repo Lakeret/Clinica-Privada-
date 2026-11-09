@@ -13,7 +13,6 @@ Proyecto integrador Clinica Privada sitio para pacientes hecho en HTML, CSS y Ja
 
 No hace falta instalar Maven por separado: el proyecto incluye Maven Wrapper.
 
-<<<<<<< HEAD
 ## Clonar desde la terminal
 
 Abrí PowerShell, la terminal de Visual Studio Code o Git Bash y ejecutá:
@@ -25,7 +24,6 @@ Abrí PowerShell, la terminal de Visual Studio Code o Git Bash y ejecutá:
 
 Abrí PowerShell, la terminal de Visual Studio Code o Git Bash y ejecutá:
 
->>>>>>> 64a9d76 (Agrego carpeta con backend y frontend)
 ```bash
 git clone -b FrontEnd https://github.com/Lakeret/Clinica-Privada-.git
 cd Clinica-Privada-
@@ -116,8 +114,4 @@ Clinica-Privada-
 - Java 21 y Spring Boot 4.1.2
 - Maven Wrapper 3.10.0
 - MySQL
-<<<<<<< HEAD
 - HTML, CSS y JavaScript
-=======
-- HTML, CSS y JavaScript
->>>>>>> 64a9d76 (Agrego carpeta con backend y frontend)
