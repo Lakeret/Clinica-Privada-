@@ -1,19 +1,17 @@
 # Clínica Privada
 
-Proyecto integrador Clinica Privada sitio para pacientes hecho en HTML, CSS y JavaScript, y una API hecha en Java con Spring Boot y Maven.
+Proyecto integrador Clinica Privada con API hecha en Java con Spring Boot y Maven.
 
 ## Requisitos
 
 - Git, para clonar y actualizar el repositorio.
 - JDK 21, porque el proyecto está configurado para Java 21.
-- MySQL funcionando en el puerto `3306`.
-- La base de datos con nombre `sistema_clinico`, con sus tablas, store prodcedures y triggers.
+- MySQL funcionando en el puerto "3306".
+- La base de datos con nombre "sistema_clinico", con sus tablas, store prodcedures y triggers.
 - Visual Studio Code o Spring Tools Suite (STS), para editar y ejecutar el proyecto.
 - Conexión a Internet durante la primera ejecución, para que Maven descargue las dependencias.
 
-No hace falta instalar Maven por separado: el proyecto incluye Maven Wrapper.
-
-## Clonar desde la terminal
+## Clonar con GIT
 
 Abrí PowerShell, la terminal de Visual Studio Code o Git Bash y ejecutá:
 
@@ -24,14 +22,14 @@ git clone -b FrontEnd https://github.com/Lakeret/Clinica-Privada-.git
 ## Preparar la base de datos
 
 1. Iniciá MySQL.
-2. Creá o importá la base `sistema_clinico` con las tablas, store procedures y triggers que necesita la API.
-3. Revisá `backend/src/main/resources/application.properties` y configurá la dirección, el usuario y la contraseña de tu MySQL.
+2. Ejecutar SCRIPT de la base "sistema_clinico" con las tablas, store procedures y triggers que necesita la API
+3. Revisá "backend/src/main/resources/application.properties" y configurá la dirección, el usuario y la contraseña de tu MySQL
 
 ## Ejecutar en Visual Studio Code
 
 ### Extensiones
 
-Instalá estas extensiones desde la sección **Extensiones** de VS Code:
+Instalá estas extensiones desde la sección **Extensiones** de VS:
 
 - **Extension Pack for Java**
 - **Spring Boot Extension Pack**
@@ -50,9 +48,6 @@ cd backend
 ```buscar en el navegador:
 http://localhost:8080/
 ```
-
-La página principal te lleva al sitio de pacientes. El frontend se sirve desde Spring Boot, por lo que sus llamadas a `/api/...` usan la misma dirección que la API. Para probarlo, usá la dirección `localhost:8080`; no abras los HTML directamente desde el explorador de archivos.
-
 Para detener la aplicación, volvé a la terminal y presioná `Ctrl+C`.
 
 ## Ejecutar en Spring Tools Suite (STS)
