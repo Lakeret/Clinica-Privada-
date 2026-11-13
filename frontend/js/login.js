@@ -5,11 +5,15 @@ const verPassword = document.getElementById("ver-password");
 const mensajeLogin = document.getElementById("mensaje-login");
 const botonLogin = document.getElementById("entrar");
 
-verPassword?.addEventListener("change", () => {
-    passwordInput.type = verPassword.checked ? "text" : "password";
+verPassword.addEventListener("change", () => {
+    if (verPassword.checked) {
+        passwordInput.type = "text";
+    } else {
+        passwordInput.type = "password";
+    }
 });
 
-formularioLogin?.addEventListener("submit", async (event) => {
+formularioLogin.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     mensajeLogin.textContent = "";
@@ -17,7 +21,7 @@ formularioLogin?.addEventListener("submit", async (event) => {
     const dni = dniInput.value.trim();
     const contrasena = passwordInput.value;
 
-    if (!/^\d{7,10}$/.test(dni)) {
+    if (dni.length < 7 || dni.length > 10 || isNaN(dni)) {
         mensajeLogin.textContent = "Ingresá un DNI válido.";
         return;
     }
@@ -49,6 +53,6 @@ formularioLogin?.addEventListener("submit", async (event) => {
     }
 });
 
-document.querySelector(".recovery")?.addEventListener("click", () => {
+document.querySelector(".recovery").addEventListener("click", () => {
     alert("Para recuperar tus datos, comunicate con la administración de la clínica.");
 });

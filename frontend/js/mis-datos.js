@@ -201,7 +201,7 @@ async function guardarDatos(event) {
     }
 }
 
-document.getElementById("botonEliminarCuenta")?.addEventListener("click", async () => {
+document.getElementById("botonEliminarCuenta").addEventListener("click", async () => {
     const confirmar = window.confirm(
         "Se eliminarán de forma permanente tu cuenta, tus datos y tus registros médicos. ¿Querés continuar?"
     );

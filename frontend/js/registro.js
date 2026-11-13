@@ -5,13 +5,17 @@ const passwordInput = document.getElementById("password");
 const confirmarPasswordInput = document.getElementById("confirmar-password");
 const verPassword = document.getElementById("ver-password");
 
-verPassword?.addEventListener("change", () => {
-    const tipo = verPassword.checked ? "text" : "password";
+verPassword.addEventListener("change", () => {
+    if (verPassword.checked) {
+        passwordInput.type = "text";
+    } else {
+        passwordInput.type = "password";
+    }
     passwordInput.type = tipo;
     confirmarPasswordInput.type = tipo;
 });
 
-formularioRegistro?.addEventListener("submit", async (event) => {
+formularioRegistro.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     mensajeRegistro.textContent = "";
@@ -21,7 +25,7 @@ formularioRegistro?.addEventListener("submit", async (event) => {
     const confirmarContrasena = confirmarPasswordInput.value;
     const obraSocialSeleccionada = document.getElementById("obraSocial").value;
 
-    if (!/^\d{7,10}$/.test(dni)) {
+    if (dni.length < 7 || dni.length > 10 || isNaN(dni)) {
         mensajeRegistro.textContent = "El DNI debe tener entre 7 y 10 números.";
         return;
     }
