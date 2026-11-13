@@ -261,6 +261,8 @@ nav a:hover {
 }
 
 footer {
+    justify-content: center;
+    align-items: center;
     padding: 35px 20px;
     color: white;
     background-color: #123b52;
@@ -279,6 +281,6 @@ footer {
 
 footer .legal {
     margin-top: 20px;
-    color: #d1d1d1;
     font-size: 12px;
 }
+
