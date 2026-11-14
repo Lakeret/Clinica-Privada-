@@ -25,12 +25,31 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Integer getIdUsuario() { return idUsuario; }
-    public Paciente getPaciente() { return paciente; }
-    public String getContrasena() { return contrasena; }
-    public String getEstado() { return estado; }
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
 
-    public void setPaciente(Paciente paciente) { this.paciente = paciente; }
-    public void setContrasena(String contrasena) { this.contrasena = contrasena; }
-    public void setEstado(String estado) { this.estado = estado; }
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 }

@@ -30,11 +30,31 @@ public class Turno {
 
     private String motivo;
 
-    public Integer getIdTurno() { return idTurno; }
-    public Integer getIdPaciente() { return idPaciente; }
-    public Integer getIdEmpleado() { return idEmpleado; }
-    public LocalDate getFecha() { return fecha; }
-    public LocalTime getHora() { return hora; }
-    public String getEstado() { return estado; }
-    public String getMotivo() { return motivo; }
+    public Integer getIdTurno() {
+        return idTurno;
+    }
+
+    public Integer getIdPaciente() {
+        return idPaciente;
+    }
+
+    public Integer getIdEmpleado() {
+        return idEmpleado;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public LocalTime getHora() {
+        return hora;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public String getMotivo() {
+        return motivo;
+    }
 }
