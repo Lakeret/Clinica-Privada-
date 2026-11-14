@@ -8,8 +8,10 @@ const verPassword = document.getElementById("ver-password");
 verPassword.addEventListener("change", () => {
     if (verPassword.checked) {
         passwordInput.type = "text";
+        confirmarPasswordInput.type = "text";
     } else {
         passwordInput.type = "password";
+        confirmarPasswordInput.type = "password";
     }
     passwordInput.type = tipo;
     confirmarPasswordInput.type = tipo;
