@@ -27,8 +27,8 @@ formularioRegistro.addEventListener("submit", async (event) => {
     const confirmarContrasena = confirmarPasswordInput.value;
     const obraSocialSeleccionada = document.getElementById("obraSocial").value;
 
-    if (dni.length < 7 || dni.length > 10 || isNaN(dni)) {
-        mensajeRegistro.textContent = "El DNI debe tener entre 7 y 10 números.";
+    if (dni.length == 7 || dni.length == 8 || isNaN(dni)) {
+        mensajeRegistro.textContent = "El DNI debe tener entre 7 y 8 números.";
         return;
     }
 
@@ -71,7 +71,7 @@ formularioRegistro.addEventListener("submit", async (event) => {
             throw new Error(resultado.detail || "No se pudo crear la cuenta.");
         }
 
-        mensajeRegistro.textContent = "Cuenta creada. Redirigiendo al inicio de sesión…";
+        mensajeRegistro.textContent = "Cuenta creada con exito...";
 
         setTimeout(() => {
             window.location.href = "../paginas/LogIn-Pacientes.html";

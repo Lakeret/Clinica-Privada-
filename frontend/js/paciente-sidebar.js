@@ -22,7 +22,7 @@ async function cargarPacienteSidebar() {
         nombre.textContent = `${paciente.nombre} ${paciente.apellido}`;
         dni.textContent = `DNI: ${paciente.dni}`;
     } catch (error) {
-        console.error("Error al cargar el paciente del menú:", error);
+        console.error("Error al cargar el paciente del menu:", error);
         nombre.textContent = "No se pudieron cargar los datos";
         dni.textContent = "";
     }

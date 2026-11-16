@@ -24,7 +24,7 @@ async function cargarDatosPaciente() {
         dniElemento.textContent = `DNI: ${paciente.dni}`;
         saludoElemento.textContent = paciente.nombre;
     } catch (error) {
-        console.error("Error al cargar el paciente:", error);
+        console.error("Error al cargar el paciente ", error);
         saludoElemento.textContent = "No se pudieron cargar tus datos";
     }
 }

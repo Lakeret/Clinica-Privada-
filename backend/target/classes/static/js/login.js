@@ -47,12 +47,12 @@ formularioLogin.addEventListener("submit", async (event) => {
         window.location.href = "../paginas/inicio-paciente.html";
     } catch (error) {
         mensajeLogin.textContent =
-            error.message || "No se pudo conectar con la API.";
+            error.message || "No se pudo conectar con la API";
     } finally {
         botonLogin.disabled = false;
     }
 });
 
 document.querySelector(".recovery").addEventListener("click", () => {
-    alert("Para recuperar tus datos, comunicate con la administración de la clínica.");
+    alert("Para recuperar tus datos, comunicate con la administración de la clinica de forma presencial o por nuestros medios de comunicacion");
 });

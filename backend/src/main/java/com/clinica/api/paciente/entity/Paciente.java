@@ -28,7 +28,7 @@ public class Paciente {
     private LocalDate fechaNacimiento;
 
     @Column(nullable = false, length = 20)
-    private String sexo = "NO_ESPECIFICADO";
+    private String sexo = "NO_ESPECIFICO";
 
     @Column(length = 30)
     private String telefono;

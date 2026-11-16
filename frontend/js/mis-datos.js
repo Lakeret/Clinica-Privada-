@@ -19,7 +19,7 @@ async function cargarMisDatos() {
         }
 
         if (!respuesta.ok) {
-            throw new Error("No se pudieron cargar tus datos.");
+            throw new Error("No se pudieron cargar tus datos");
         }
 
         pacienteActual = await respuesta.json();
@@ -115,7 +115,7 @@ async function cargarMisDatos() {
             paciente.idObraSocial
                 ? `Cobertura registrada (ID ${paciente.idObraSocial})`
                 : null,
-            "Sin cobertura registrada"
+            "No registro Cobertura"
         );
 
         mostrar("txtPlan", null, "No registrado");
@@ -183,14 +183,14 @@ async function guardarDatos(event) {
         const resultado = await respuesta.json().catch(() => ({}));
 
         if (!respuesta.ok) {
-            throw new Error(resultado.detail || "No se pudieron guardar los cambios.");
+            throw new Error(resultado.detail || "No se pudieron guardar los cambios");
         }
 
         cerrarModal();
         await cargarMisDatos();
 
         if (mensaje) {
-            mensaje.textContent = "Tus datos se actualizaron correctamente.";
+            mensaje.textContent = "Tus datos se actualizaron correctamente";
         }
     } catch (error) {
         if (mensaje) {
@@ -227,10 +227,10 @@ document.getElementById("botonEliminarCuenta").addEventListener("click", async (
         const resultado = await respuesta.json().catch(() => ({}));
 
         if (!respuesta.ok) {
-            throw new Error(resultado.detail || "No se pudo eliminar la cuenta.");
+            throw new Error(resultado.detail || "No se pudo eliminar la cuenta");
         }
 
-        window.location.href = "crear-cuenta.html";
+        window.location.href = "index.html";
     } catch (error) {
         mensaje.textContent = error.message;
         boton.disabled = false;
