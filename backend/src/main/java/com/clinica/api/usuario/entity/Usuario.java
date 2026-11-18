@@ -16,7 +16,7 @@ public class Usuario {
     @JoinColumn(name = "id_paciente", unique = true)
     private Paciente paciente;
 
-    @Column(name = "contrasena", nullable = false, length = 255)
+    @Column(name = "contrasena", nullable = false, length = 72)
     private String contrasena;
 
     @Column(nullable = false, length = 20)

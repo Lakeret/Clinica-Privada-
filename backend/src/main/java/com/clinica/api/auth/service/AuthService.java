@@ -10,7 +10,6 @@ import com.clinica.api.usuario.repository.UsuarioRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
@@ -22,17 +21,14 @@ public class AuthService {
 
         private final PacienteRepository pacienteRepository;
         private final UsuarioRepository usuarioRepository;
-        private final PasswordEncoder passwordEncoder;
         private final JdbcTemplate jdbcTemplate;
 
         public AuthService(
                         PacienteRepository pacienteRepository,
                         UsuarioRepository usuarioRepository,
-                        PasswordEncoder passwordEncoder,
                         JdbcTemplate jdbcTemplate) {
                 this.pacienteRepository = pacienteRepository;
                 this.usuarioRepository = usuarioRepository;
-                this.passwordEncoder = passwordEncoder;
                 this.jdbcTemplate = jdbcTemplate;
         }
 
@@ -71,7 +67,7 @@ public class AuthService {
 
                 Usuario usuario = new Usuario();
                 usuario.setPaciente(pacienteGuardado);
-                usuario.setContrasena(passwordEncoder.encode(datos.contrasena()));
+                usuario.setContrasena(datos.contrasena());
                 usuario.setEstado("ACTIVO");
 
                 usuarioRepository.save(usuario);
@@ -96,7 +92,7 @@ public class AuthService {
                 String estado = (String) credenciales.get("estado");
                 Integer idPaciente = ((Number) credenciales.get("id_paciente")).intValue();
 
-                boolean contrasenaCorrecta = passwordEncoder.matches(contrasena, contrasenaGuardada);
+                boolean contrasenaCorrecta = contrasena.equals (contrasenaGuardada);
 
                 if (!"ACTIVO".equals(estado) || !contrasenaCorrecta) {
                         throw new ResponseStatusException(
