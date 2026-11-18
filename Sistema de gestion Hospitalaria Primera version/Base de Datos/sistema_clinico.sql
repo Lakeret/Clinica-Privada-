@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `id_usuario` int unsigned NOT NULL AUTO_INCREMENT,
   `id_empleado` int unsigned DEFAULT NULL,
   `id_paciente` int unsigned DEFAULT NULL,
-  `contrasena` varchar(255) NOT NULL COMMENT 'Hash generado por el backend, nunca texto plano',
+  `contrasena` varchar(72) NOT NULL,
   `estado` varchar(20) NOT NULL,
   PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `id_empleado` (`id_empleado`),
