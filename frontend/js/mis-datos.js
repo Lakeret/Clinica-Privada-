@@ -230,7 +230,7 @@ document.getElementById("botonEliminarCuenta").addEventListener("click", async (
             throw new Error(resultado.detail || "No se pudo eliminar la cuenta");
         }
 
-        window.location.href = "index.html";
+        window.location.href = "../index.html";
     } catch (error) {
         mensaje.textContent = error.message;
         boton.disabled = false;

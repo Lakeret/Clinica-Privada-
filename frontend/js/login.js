@@ -21,7 +21,7 @@ formularioLogin.addEventListener("submit", async (event) => {
     const dni = dniInput.value.trim();
     const contrasena = passwordInput.value;
 
-    if (dni.length < 7 || dni.length > 10 || isNaN(dni)) {
+    if (dni.length < 7 || dni.length > 9 || isNaN(dni)) {
         mensajeLogin.textContent = "Ingresá un DNI válido.";
         return;
     }

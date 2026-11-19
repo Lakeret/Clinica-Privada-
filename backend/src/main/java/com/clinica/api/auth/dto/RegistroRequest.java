@@ -10,8 +10,8 @@ import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 
 public record RegistroRequest(
-        @NotBlank
-        @Pattern(regexp = "\\d{7,8}", message = "El DNI debe tener entre 7 y 8 números")
+        @NotBlank (message = "El DNI es obligatorio si o si")
+        @Pattern(regexp = "\\d{7,9}", message = "El DNI debe tener entre 7 y 8 números")
         String dni,
 
         @NotBlank

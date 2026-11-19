@@ -13,8 +13,6 @@ verPassword.addEventListener("change", () => {
         passwordInput.type = "password";
         confirmarPasswordInput.type = "password";
     }
-    passwordInput.type = tipo;
-    confirmarPasswordInput.type = tipo;
 });
 
 formularioRegistro.addEventListener("submit", async (event) => {
@@ -27,13 +25,18 @@ formularioRegistro.addEventListener("submit", async (event) => {
     const confirmarContrasena = confirmarPasswordInput.value;
     const obraSocialSeleccionada = document.getElementById("obraSocial").value;
 
-    if (dni.length == 7 || dni.length == 8 || isNaN(dni)) {
+    if (dni.length < 7 || dni.length > 9 || isNaN(dni)) {
         mensajeRegistro.textContent = "El DNI debe tener entre 7 y 8 números.";
         return;
     }
 
     if (contrasena !== confirmarContrasena) {
         mensajeRegistro.textContent = "Las contraseñas no coinciden.";
+        return;
+    }
+
+    if (contrasena.length <= 8 || contrasena.length > 72) {
+        mensajeRegistro.textContent = "La contraseña debe tener entre 8 y 72 caracteres.";
         return;
     }
 
@@ -49,7 +52,7 @@ formularioRegistro.addEventListener("submit", async (event) => {
         provincia: document.getElementById("provincia").value,
         contrasena,
         confirmarContrasena,
-        idObraSocial: obraSocialSeleccionada? Number(obraSocialSeleccionada): null,
+        idObraSocial: obraSocialSeleccionada ? Number(obraSocialSeleccionada) : null,
         telefono: document.getElementById("tele").value.trim(),
         email: document.getElementById("correo").value.trim(),
         fechaNacimiento: document.getElementById("nacimiento").value

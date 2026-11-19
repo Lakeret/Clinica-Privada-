@@ -5,7 +5,6 @@ com\clinica\api\turno\dto\TurnoResponseDTO.class
 com\clinica\api\usuario\entity\Usuario.class
 com\clinica\api\usuario\repository\UsuarioRepository.class
 com\clinica\api\auth\service\AuthService.class
-com\clinica\api\config\PasswordConfig.class
 com\clinica\api\turno\dto\TurnoRequest.class
 com\clinica\api\ClinicaApiApplication.class
 com\clinica\api\auth\dto\LoginRequest.class

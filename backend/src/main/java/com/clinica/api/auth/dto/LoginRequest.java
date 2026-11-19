@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Pattern;
 
 public record LoginRequest(
         @NotBlank
-        @Pattern(regexp = "\\d{7,10}")
+        @Pattern(regexp = "\\d{7,9}")
         String dni,
 
         @NotBlank
