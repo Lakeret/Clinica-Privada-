@@ -89,8 +89,8 @@ Clinica-Privada-
 - MySQL
 - HTML , CSS y JavaScript
 
-  ## Por si no se puede clonar los archivos
-  # Segui estos pasos:
+  # Por si no se puede clonar los archivos
+  ## Segui estos pasos:
 
 1. Abre el menú Inicio, busca Editar las variables de entorno del sistema y ábrelo.
 2. Haz clic en el botón Variables de entorno... (abajo a la derecha).
