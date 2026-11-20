@@ -104,5 +104,5 @@ Clinica-Privada-
      C:\Program Files\Git\bin
 ```
 
-5. Acepta todas las ventanas, reinicie Visual Studio Code y vuelve a probar el git clone.
+5. Acepta todas las ventanas, reinicie Visual Studio Code y vuelve a probar el `git clone`.
 
