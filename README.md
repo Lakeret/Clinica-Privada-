@@ -88,3 +88,21 @@ Clinica-Privada-
 - Maven Wrapper 3.10.0
 - MySQL
 - HTML , CSS y JavaScript
+
+  ## Por si no se puede clonar los archivos
+  # Segui estos pasos:
+
+1. Abre el menú Inicio, busca Editar las variables de entorno del sistema y ábrelo.
+2. Haz clic en el botón Variables de entorno... (abajo a la derecha).
+3. En la sección Variables del sistema (el cuadro de abajo), busca la fila Path, seleccionala y haz clic en Editar.
+4. Haz clic en Nuevo y agrega estas dos rutas (suponiendo una instalación estándar):
+
+```bash
+     C:\Program Files\Git\cmd
+```
+```bash
+     C:\Program Files\Git\bin
+```
+
+5. Acepta todas las ventanas, reinicie Visual Studio Code y vuelve a probar el git clone.
+
