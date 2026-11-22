@@ -1,0 +1,73 @@
+{
+  "stats": {
+    "minecraft:picked_up": {
+      "minecraft:dark_oak_shelf": 269,
+      "minecraft:oak_shelf": 32,
+      "minecraft:nether_brick_fence": 1,
+      "minecraft:pale_oak_shelf": 1,
+      "minecraft:waxed_copper_lantern": 4,
+      "minecraft:white_concrete_powder": 21,
+      "minecraft:pale_oak_button": 4,
+      "minecraft:spruce_pressure_plate": 3,
+      "minecraft:dark_oak_door": 2,
+      "minecraft:paper": 9907
+    },
+    "minecraft:used": {
+      "minecraft:oak_shelf": 1089,
+      "minecraft:player_head": 507,
+      "minecraft:cartography_table": 13,
+      "minecraft:waxed_lightning_rod": 22,
+      "minecraft:smooth_quartz_slab": 25,
+      "minecraft:pale_oak_shelf": 3,
+      "minecraft:sticky_piston": 54,
+      "minecraft:glass": 10,
+      "minecraft:dark_oak_stairs": 643,
+      "minecraft:white_concrete_powder": 259,
+      "minecraft:black_terracotta": 11,
+      "minecraft:dirt": 32,
+      "minecraft:deepslate_tile_slab": 8,
+      "minecraft:white_concrete": 100,
+      "minecraft:dark_oak_shelf": 1284,
+      "minecraft:dark_oak_door": 33,
+      "minecraft:oak_slab": 2,
+      "minecraft:dispenser": 13,
+      "minecraft:waxed_copper_golem_statue": 572,
+      "minecraft:stripped_spruce_wood": 1,
+      "minecraft:nether_brick_wall": 1,
+      "minecraft:sea_lantern": 23,
+      "minecraft:hopper": 3,
+      "minecraft:nether_brick_fence": 8,
+      "minecraft:lectern": 551,
+      "minecraft:smooth_quartz_stairs": 51,
+      "minecraft:barrier": 26,
+      "minecraft:pale_oak_button": 27
+    },
+    "minecraft:dropped": {
+      "minecraft:waxed_copper_lantern": 4,
+      "minecraft:pale_oak_button": 1,
+      "minecraft:paper": 6871,
+      "minecraft:oak_shelf": 32,
+      "minecraft:pale_oak_shelf": 1,
+      "minecraft:white_concrete_powder": 1,
+      "minecraft:nether_brick_fence": 1
+    },
+    "minecraft:custom": {
+      "minecraft:time_since_rest": 2276828,
+      "minecraft:walk_one_cm": 1440406,
+      "minecraft:leave_game": 10,
+      "minecraft:play_time": 2276828,
+      "minecraft:jump": 1120,
+      "minecraft:time_since_death": 2276828,
+      "minecraft:drop": 116,
+      "minecraft:interact_with_cartography_table": 6,
+      "minecraft:sprint_one_cm": 62119,
+      "minecraft:inspect_dispenser": 67,
+      "minecraft:inspect_hopper": 13,
+      "minecraft:total_world_time": 2312973,
+      "minecraft:fly_one_cm": 7173695,
+      "minecraft:crouch_one_cm": 7578,
+      "minecraft:sneak_time": 9971
+    }
+  },
+  "DataVersion": 4903
+}
